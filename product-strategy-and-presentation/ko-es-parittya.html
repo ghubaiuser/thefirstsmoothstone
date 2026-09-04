@@ -1,0 +1,625 @@
+<!doctype html>
+<title>Kő és Parittya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#EAE7DE;
+  --surface:#F6F4ED;
+  --surface-2:#DEDACC;
+  --ink:#23261F;
+  --ink-soft:#565A4A;
+  --ink-faint:#8B8F7C;
+  --line:#CFC9B7;
+  --line-soft:#DEDACC;
+  --accent:#4C6952;
+  --accent-strong:#33473A;
+  --accent-soft:#DBE3D4;
+  --on-accent:#F6F4ED;
+  --good:#3F7D4E;
+  --warn:#A8752B;
+  --crit:#A3402B;
+  --stone-1:#C7BFA3;
+  --stone-2:#8C824F;
+  --stone-3:#33473A;
+  --charity:#9C6B33;
+  --charity-soft:#EFE2CD;
+  --shadow:0 1px 2px rgba(35,38,31,.07), 0 10px 26px -18px rgba(35,38,31,.32);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#14160F;
+    --surface:#1C1F16;
+    --surface-2:#262A1B;
+    --ink:#E9E6D9;
+    --ink-soft:#B2AF9B;
+    --ink-faint:#82806A;
+    --line:#333621;
+    --line-soft:#262A1B;
+    --accent:#8FBF9C;
+    --accent-strong:#B7DBBF;
+    --accent-soft:#213024;
+    --on-accent:#0E150F;
+    --good:#6FC17E;
+    --warn:#D7A13B;
+    --crit:#E0705F;
+    --stone-1:#5B5738;
+    --stone-2:#8FA05F;
+    --stone-3:#BFE2C4;
+    --charity:#D9A464;
+    --charity-soft:#332510;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14160F;
+  --surface:#1C1F16;
+  --surface-2:#262A1B;
+  --ink:#E9E6D9;
+  --ink-soft:#B2AF9B;
+  --ink-faint:#82806A;
+  --line:#333621;
+  --line-soft:#262A1B;
+  --accent:#8FBF9C;
+  --accent-strong:#B7DBBF;
+  --accent-soft:#213024;
+  --on-accent:#0E150F;
+  --good:#6FC17E;
+  --warn:#D7A13B;
+  --crit:#E0705F;
+  --stone-1:#5B5738;
+  --stone-2:#8FA05F;
+  --stone-3:#BFE2C4;
+  --charity:#D9A464;
+  --charity-soft:#332510;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+  font-size:17px;
+  line-height:1.62;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,52px) 100px}
+
+/* ---------- masthead ---------- */
+.mast{
+  padding:clamp(44px,8vw,84px) 0 clamp(30px,4vw,46px);
+  border-bottom:2px solid var(--ink);
+  position:relative;
+}
+.brandrow{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.emblem{width:54px;height:54px;flex:none;color:var(--accent)}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+}
+.wordmark{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:900;font-style:normal;
+  font-size:clamp(40px,7.4vw,68px);
+  line-height:.96;letter-spacing:-.01em;
+  margin:.1em 0 .22em;text-wrap:balance;
+}
+.tagline{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:600;font-style:italic;font-size:clamp(19px,2.6vw,25px);line-height:1.3;
+  max-width:24ch;margin:0 0 1.05em;color:var(--accent-strong);text-wrap:balance;
+}
+.standfirst{max-width:64ch;color:var(--ink-soft);margin:0;font-size:16.5px}
+.mast-meta{
+  display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:30px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+}
+.mast-meta b{color:var(--ink);font-weight:500}
+
+/* ---------- sections ---------- */
+section{
+  display:grid;
+  grid-template-columns:9rem minmax(0,1fr);
+  gap:0 40px;
+  padding:clamp(42px,6vw,70px) 0;
+  border-bottom:1px solid var(--line);
+}
+section:last-of-type{border-bottom:0}
+.rail{padding-top:.5em}
+.rail .tag{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);display:block;
+}
+.rail .sub{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.06em;
+  color:var(--ink-faint);display:block;margin-top:6px;line-height:1.5;max-width:9rem;
+}
+.body-col{min-width:0}
+h2{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:700;font-size:clamp(25px,3.4vw,34px);line-height:1.16;
+  letter-spacing:-.015em;margin:0 0 .55em;text-wrap:balance;
+}
+h3{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:600;font-size:19px;letter-spacing:-.005em;
+  margin:1.8em 0 .5em;
+}
+p{margin:0 0 1.05em;max-width:66ch}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic;color:var(--accent-strong)}
+.lede{font-size:19px;line-height:1.55;color:var(--ink)}
+
+/* ---------- three pillars ---------- */
+.pillars{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1.5em}
+@media(min-width:760px){.pillars{grid-template-columns:repeat(3,1fr)}}
+.pillar{background:var(--surface);padding:22px 20px 24px;display:grid;gap:10px}
+.pillar .picon{width:34px;height:34px;color:var(--accent)}
+.pillar .pname{font-family:Fraunces,serif;font-weight:700;font-size:17px;letter-spacing:-.008em}
+.pillar .pwhat{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+}
+.pillar .pdesc{font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+
+/* ---------- figures ---------- */
+figure{margin:1.7em 0 0}
+.fig-frame{
+  background:var(--surface);border:1px solid var(--line);
+  padding:22px 20px 14px;overflow-x:auto;box-shadow:var(--shadow);
+}
+.fig-frame svg{display:block;min-width:560px;width:100%;height:auto;color:var(--ink-soft)}
+figcaption{font-size:13.5px;line-height:1.5;color:var(--ink-faint);margin-top:12px;max-width:70ch}
+
+/* ---------- portfolio grid ---------- */
+.portfolio{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1.6em}
+@media(min-width:700px){.portfolio{grid-template-columns:repeat(2,1fr)}}
+.pf-card{background:var(--surface);padding:22px 22px 20px;display:grid;gap:12px}
+.pf-card.tool{background:var(--accent-soft)}
+.pf-head{display:flex;align-items:flex-start;gap:14px}
+.pf-icon{width:40px;height:40px;flex:none;color:var(--accent-strong)}
+.pf-titles{min-width:0}
+.pf-name{font-family:Fraunces,serif;font-weight:700;font-size:19px;letter-spacing:-.008em;line-height:1.2}
+.pf-code{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);margin-top:3px;display:block;
+}
+.pf-domain{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.pf-foot{display:flex;align-items:center;gap:10px;margin-top:2px}
+.stage-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px 3px 7px;border-radius:20px;border:1px solid var(--line);
+}
+.stage-pill .dot{width:8px;height:8px;border-radius:50%}
+.stage-pill.lead .dot{background:var(--stone-1)}
+.stage-pill.prospect .dot{background:var(--stone-2)}
+.stage-pill.product .dot{background:var(--stone-3)}
+.stage-pill.devtool .dot{background:var(--accent)}
+.stage-pill.charity .dot{background:var(--charity)}
+.pf-card.charity{background:var(--charity-soft)}
+
+/* ---------- role list ---------- */
+.roles{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1.6em}
+.role{background:var(--surface);padding:18px 20px}
+.role .rn{font-family:Fraunces,serif;font-weight:700;font-size:16.5px;letter-spacing:-.008em}
+.role .rd{font-size:14.5px;line-height:1.5;color:var(--ink-soft);margin-top:5px;max-width:64ch}
+
+.pull{
+  border-left:3px solid var(--accent);padding:2px 0 2px 22px;margin:1.7em 0 0;
+  font-family:Fraunces,serif;font-weight:600;font-style:italic;font-size:clamp(18px,2.3vw,21px);
+  line-height:1.34;letter-spacing:-.008em;max-width:46ch;color:var(--accent-strong);text-wrap:balance;
+}
+
+.foot{
+  padding-top:32px;font-size:13.5px;color:var(--ink-faint);line-height:1.6;
+  border-top:1px solid var(--line);margin-top:6px;max-width:none;
+}
+
+@media(max-width:720px){
+  section{grid-template-columns:1fr;gap:0}
+  .rail{padding-top:0;margin-bottom:14px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .rail .sub{margin-top:0;max-width:none}
+  body{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="brandrow">
+    <svg class="emblem" viewBox="0 0 64 64" role="img" aria-label="thefirstsmoothstone embléma">
+      <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="32" y1="48" x2="20" y2="21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="32" y1="48" x2="44" y2="21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="25.5" y1="33.5" x2="38.5" y2="33.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="32" cy="33.5" r="4.6" fill="currentColor"/>
+      <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".75">
+        <line x1="44" y1="15" x2="51" y2="15"/>
+        <line x1="47.5" y1="11.5" x2="47.5" y2="18.5"/>
+        <line x1="44.9" y1="12.4" x2="50.1" y2="17.6"/>
+        <line x1="44.9" y1="17.6" x2="50.1" y2="12.4"/>
+      </g>
+    </svg>
+    <span class="eyebrow">Bemutató · v1 · 2026. szeptember</span>
+  </div>
+  <div class="wordmark">thefirstsmoothstone</div>
+  <p class="tagline">Már az első kő talál.</p>
+  <p class="standfirst">Kicsi, mesterséges intelligencia ügynökökkel felfegyverzett fejlesztőműhely, ami valódi, validált problémákra épít szoftvert. Miközben saját termékeket farag, a szerszám, amivel farag — a fejlesztési munkafolyamat — maga is egyre kifinomultabb géppé érik, és idővel önálló termékké válik.</p>
+  <div class="mast-meta">
+    <span>Csapat <b>AI-csapat, professzionális felügyelettel</b></span>
+    <span>Módszer <b>agent-vezérelt fejlesztés</b></span>
+    <span>Aktív szálak <b>6</b></span>
+  </div>
+</header>
+
+<section>
+  <div class="rail"><span class="tag">Tézis</span><span class="sub">mit csinálunk valójában</span></div>
+  <div class="body-col">
+    <h2>Három láb, egy kéz</h2>
+    <p class="lede">A fő profil egyszerű: <strong>AI-ügynökök segítségével valódi problémákra fejlesztünk szoftvert.</strong> Nem ötletből indulunk kifelé, hanem egy fájdalompontból — egy építőipari kivitelező kiszámíthatatlan kifizetéséből, egy középvállalat hiányzó stratégiai radarjából, egy négy éve leállt iskolai rendszer újraindítási igényéből.</p>
+    <p>Eközben történik valami, amit a legtöbb egyszemélyes műhely nem vesz észre magán: a szerszám, amivel dolgozunk — a Jira-tól a code review-n át a deploy-ig vezető, ügynökökre bontott munkafolyamat — minden egyes termékkel finomodik. Ami az első terméknél még kézi improvizáció volt, a harmadiknál már csomagolt, verziózott, más repóba telepíthető rendszer. <strong>A szerszám maga is termékké válik.</strong></p>
+    <p>Ez adja a második lábat. A harmadik pedig onnan jön, hogy amit magunkra megépítettünk, az másra is ráépíthető: megrendelésre fejlesztünk mások ötletéből terméket, AI-bevezetési tanácsadóként állunk be egy csapat mellé, vagy egyszerűen product engineer / product manager szerepben vállalunk határidős megbízást.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="picon" viewBox="0 0 34 34" role="img" aria-label="Kő ikon"><path d="M17 4 L28 12 L24 28 L10 28 L6 12 Z" fill="currentColor" opacity=".92"/></svg>
+        <span class="pwhat">1. láb</span>
+        <span class="pname">A kő — saját termékek</span>
+        <span class="pdesc">SaaS, micro-SaaS és dobozos szoftver, amit egy konkrét, validált piaci problémára szabunk és mi magunk birtokolunk.</span>
+      </div>
+      <div class="pillar">
+        <svg class="picon" viewBox="0 0 34 34" role="img" aria-label="Parittya ikon">
+          <line x1="17" y1="29" x2="7" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="17" y1="29" x2="27" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="11" y1="16.5" x2="23" y2="16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="17" cy="16.5" r="3.6" fill="currentColor"/>
+        </svg>
+        <span class="pwhat">2. láb</span>
+        <span class="pname">A parittya — dev-workflow</span>
+        <span class="pdesc">A saját fejlesztési módszertan és eszközrendszer, amivel minden termék elkészül. Csomagolva, verziózva — maga is termékké érő belső eszköz.</span>
+      </div>
+      <div class="pillar">
+        <svg class="picon" viewBox="0 0 34 34" role="img" aria-label="Bérmunka ikon">
+          <path d="M6 24 L20 10 L25 15 L11 29 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <line x1="17" y1="13" x2="22" y2="18" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="pwhat">3. láb</span>
+        <span class="pname">Megrendelésre faragva</span>
+        <span class="pdesc">Contractor fejlesztés mások ötletéből, AI-bevezetési tanácsadás, illetve product engineer / product manager szerepben vállalt megbízás.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="rail"><span class="tag">Létra</span><span class="sub">hogyan érik egy ötlet</span></div>
+  <div class="body-col">
+    <h2>Két kapu, három szint</h2>
+    <p>Minden termék ugyanazon az úton megy át, és a szintlépés mindig egy konkrét kapun múlik — nem a lelkesedésen.</p>
+
+    <ul style="margin:0 0 0;padding-left:1.15em;font-size:15px;line-height:1.6;color:var(--ink-soft);max-width:66ch">
+      <li style="margin-bottom:8px"><strong style="color:var(--ink)">Lead.</strong> Lehetséges termék, amit még nem tudunk, megéri-e felvenni: gazdasági és egyéb potenciál vizsgálata zajlik.</li>
+      <li style="margin-bottom:8px"><strong style="color:var(--ink)">Prospect.</strong> A feasibility-kapun átment ötlet, aminek elkezdődött a fejlesztése.</li>
+      <li><strong style="color:var(--ink)">Product.</strong> Fizetős fal mögött él, potenciálisan hasznot hoz.</li>
+    </ul>
+
+    <figure>
+      <div class="fig-frame">
+        <svg viewBox="0 0 880 150" role="img" aria-label="Az érettségi létra ábrája: Lead, Prospect és Product szint, közöttük a feasibility-kapuval és a fizetős fallal">
+          <rect x="30" y="20" width="200" height="96" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <text x="130" y="58" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.5" fill="currentColor">LEAD</text>
+          <text x="130" y="80" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="currentColor">potenciál-vizsgálat</text>
+
+          <rect x="340" y="20" width="200" height="96" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <text x="440" y="58" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.5" fill="currentColor">PROSPECT</text>
+          <text x="440" y="80" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="currentColor">fejlesztés zajlik</text>
+
+          <rect x="650" y="20" width="200" height="96" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.8"/>
+          <text x="750" y="58" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.5" fill="var(--accent-strong)">PRODUCT</text>
+          <text x="750" y="80" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="var(--accent-strong)">fizetős fal mögött</text>
+
+          <defs>
+            <marker id="kp-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="currentColor"/>
+            </marker>
+          </defs>
+
+          <line x1="232" y1="68" x2="337" y2="68" stroke="currentColor" stroke-width="1.6" marker-end="url(#kp-arrow)"/>
+          <text x="285" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".4" fill="var(--ink-faint)">feasibility-kapu</text>
+
+          <line x1="542" y1="68" x2="647" y2="68" stroke="currentColor" stroke-width="1.6" marker-end="url(#kp-arrow)"/>
+          <text x="595" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".4" fill="var(--ink-faint)">fizetős fal</text>
+        </svg>
+      </div>
+      <figcaption>A három szint egy irányban, két kapuval halad. Hogy melyik termék hol áll, azt a Portfólió szakasz mutatja — a kő anyaga és mérete (lásd lent) egy másik, ettől független tengely.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="rail"><span class="tag">Fegyver</span><span class="sub">a parittya nő</span></div>
+  <div class="body-col">
+    <h2>A parittya generációi</h2>
+    <p>A dev-workflow nem statikus szerszám: minden termékkel finomodik, és minden nagyobb verzióváltás egy nagyobb ostromgépet jelent. A fegyver mérete szabja meg, mekkora követ lehet vele elhajítani — vagyis mekkora problémát lehet egyedül, AI-ügynökökkel megoldani anélkül, hogy a munkafolyamat összeroskadna alatta.</p>
+
+    <figure>
+      <div class="fig-frame">
+        <svg viewBox="0 0 900 210" role="img" aria-label="A dev-workflow öt generációja növekvő méretben: Csúzli, Parittya, Szkorpió, Trebuchet és a jövőbeli Ágyú, a Csúzli a jelenlegi, még publikálatlan állapot">
+          <line x1="80" y1="120" x2="800" y2="120" stroke="currentColor" stroke-width="1" opacity=".25"/>
+          <defs>
+            <marker id="fg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" opacity=".5"/>
+            </marker>
+          </defs>
+          <line x1="94" y1="120" x2="256" y2="120" stroke="currentColor" stroke-width="1.2" opacity=".5" stroke-dasharray="2 5" marker-end="url(#fg-arrow)"/>
+          <line x1="274" y1="120" x2="436" y2="120" stroke="currentColor" stroke-width="1.2" opacity=".5" stroke-dasharray="2 5" marker-end="url(#fg-arrow)"/>
+          <line x1="458" y1="120" x2="616" y2="120" stroke="currentColor" stroke-width="1.2" opacity=".5" stroke-dasharray="2 5" marker-end="url(#fg-arrow)"/>
+          <line x1="644" y1="120" x2="776" y2="120" stroke="currentColor" stroke-width="1.2" opacity=".5" stroke-dasharray="2 5" marker-end="url(#fg-arrow)"/>
+
+          <circle cx="80" cy="120" r="12" fill="var(--accent)"/>
+          <text x="80" y="94" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="15" fill="var(--accent-strong)">Csúzli</text>
+          <text x="80" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--accent-strong)">v0.x · most itt</text>
+          <text x="80" y="164" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="var(--ink-soft)">egyelőre publikálatlan</text>
+
+          <circle cx="265" cy="120" r="13" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55"/>
+          <text x="265" y="94" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="15" fill="currentColor" opacity=".7">Parittya</text>
+          <text x="265" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">v1.x</text>
+          <text x="265" y="164" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="var(--ink-soft)">első csomagolt skill</text>
+
+          <circle cx="450" cy="120" r="17" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55"/>
+          <text x="450" y="90" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="16" fill="currentColor" opacity=".7">Szkorpió</text>
+          <text x="450" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">v2.x</text>
+          <text x="450" y="164" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="var(--ink-soft)">állapotgép, subagentek</text>
+
+          <circle cx="635" cy="120" r="22" fill="none" stroke="currentColor" stroke-width="1.4" opacity=".55"/>
+          <text x="635" y="84" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="18" fill="currentColor" opacity=".7">Trebuchet</text>
+          <text x="635" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">v3.x</text>
+          <text x="635" y="164" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="var(--ink-soft)">csomagregisztry, több repó</text>
+
+          <circle cx="800" cy="120" r="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 4" opacity=".5"/>
+          <text x="800" y="78" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="19" fill="currentColor" opacity=".6">Ágyú</text>
+          <text x="800" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">jövőbeli</text>
+          <text x="800" y="164" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="var(--ink-soft)">kívülre eladható termék</text>
+        </svg>
+      </div>
+      <figcaption>A kör mérete a fegyver lövési kapacitását jelzi. Jelenleg a Csúzli-generációnál tartunk — egy repóra szabva, kézzel gondozva, még publikálatlanul. A további négy lépcső egyelőre terv, nem elért állapot. Az Ágyú a célállapot: a dev-workflow maga is kívülre eladható termékké érik.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="rail"><span class="tag">Kő</span><span class="sub">három tengelyen mérve</span></div>
+  <div class="body-col">
+    <h2>Nem minden kő egyforma</h2>
+    <p>A termékek nem egy vonalon rendeződnek, hanem egy térben. A <strong>fajsúly</strong> azt mutatja, mekkora problémát old meg a termék — minél könnyebb, annál kisebb a probléma. A <strong>keménység</strong> azt, mennyire összetett a megoldás — minél puhább, annál egyszerűbb elkészíteni, és fordítva. A pont mérete pedig a harmadik tengely: mekkora tétje, ambíciója van az adott kőnek.</p>
+
+    <figure>
+      <div class="fig-frame">
+        <svg viewBox="0 0 640 430" role="img" aria-label="Buborékdiagram az öt aktív termékről: vízszintesen a fajsúly (a megoldott probléma mérete), függőlegesen a keménység (a megoldás komplexitása), a pont mérete pedig a tét nagysága">
+          <line x1="100" y1="380" x2="580" y2="380" stroke="currentColor" stroke-width="1.2" opacity=".4"/>
+          <line x1="100" y1="380" x2="100" y2="70" stroke="currentColor" stroke-width="1.2" opacity=".4"/>
+
+          <text x="100" y="398" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".08em" fill="var(--ink-faint)">KÖNNYŰ</text>
+          <text x="580" y="398" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".08em" fill="var(--ink-faint)">NEHÉZ</text>
+          <text x="340" y="416" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing=".06em" fill="var(--ink-faint)">FAJSÚLY — a megoldott probléma mérete</text>
+
+          <text x="64" y="378" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".08em" fill="var(--ink-faint)">PUHA</text>
+          <text x="60" y="80" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".08em" fill="var(--ink-faint)">KEMÉNY</text>
+          <text x="30" y="225" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing=".06em" fill="var(--ink-faint)" transform="rotate(-90 30 225)">KEMÉNYSÉG — a megoldás komplexitása</text>
+
+          <circle cx="170" cy="320" r="10" fill="var(--stone-2)"/>
+          <text x="170" y="300" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">wordcloud · Kavics</text>
+
+          <circle cx="230" cy="210" r="12" fill="var(--charity)"/>
+          <text x="230" y="188" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">manipular · Testudo</text>
+
+          <circle cx="390" cy="110" r="14" fill="var(--stone-3)"/>
+          <text x="390" y="88" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">eeas · Pala</text>
+
+          <circle cx="480" cy="290" r="20" fill="var(--stone-1)"/>
+          <text x="480" y="260" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">school-commander · FiveStones</text>
+
+          <circle cx="540" cy="135" r="22" fill="var(--stone-3)"/>
+          <text x="575" y="103" text-anchor="end" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">concon · Gránit</text>
+        </svg>
+      </div>
+      <figcaption>Öt aktív kő a fajsúly–keménység térben. A wordcloud a legkönnyebb és legpuhább — gyors, kis tétű győzelem. Az eeas (Bearing) a legkeményebb: nem a méret nehéz rajta, hanem a jogi pontosság ára. A concon a legnehezebb és legnagyobb tétű — építőipari OS-léptékű vállalás. A FiveStones nagy tétű és nagy fajsúlyú, de puha: az ambíció (edtech OS) nagy, a mai megoldás motorja még egyszerű.</figcaption>
+    </figure>
+
+    <div class="pull">A parittya mérete szabja meg, mekkora fajsúlyú követ bírunk ma elhajítani.</div>
+  </div>
+</section>
+
+<section>
+  <div class="rail"><span class="tag">Szerepek</span><span class="sub">ki tart a kőben</span></div>
+  <div class="body-col">
+    <h2>Három szerep, egy munkafolyamat</h2>
+    <p>Egy ember visz minden szerepet, de a felelősség nem mosódik össze: mindhárom szerepnek más a súlypontja a létra más szintjén, és a súlyponteltolódás maga a munkafolyamat.</p>
+
+    <div class="roles">
+      <div class="role">
+        <div class="rn">Termékfelelős / domain gazda</div>
+        <div class="rd">Ismeri a domaint, ahol a termék él — legyen szó az építőipari kivitelezés pénzfolyamairól vagy az EU-s/UK-s vállalati kockázatkezelés (EEAS) logikájáról. Ő dönti el, hogy egy jelzés valódi problémára mutat-e, mielőtt bármi kódba kerülne.</div>
+      </div>
+      <div class="role">
+        <div class="rn">Dev lead / agent overseer</div>
+        <div class="rd">Felügyeli, hogyan működik maga az AI-munkafolyamat: kiosztja és ellenőrzi az ügynökök munkáját, tartja a minőségi kaput, és karbantartja a parittyát — a dev-workflow eszközt — magát is.</div>
+      </div>
+      <div class="role">
+        <div class="rn">Sales</div>
+        <div class="rd">Kitalálja, hogyan lehet eladni és a piacra vinni az adott terméket, és a piaci visszajelzést visszavezeti a roadmapbe és a feature-listába — a legerősebb hangja Prospect és Product szinten van, de a következő Lead csírája is innen indul.</div>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-frame">
+        <svg viewBox="0 0 760 340" role="img" aria-label="Mátrix arról, mennyire aktív a három szerep a Lead, Prospect és Product szinteken, a dev lead Lead-kapuba visszaszóló jelzésével, a domain gazda sales-t tápláló jelzésével, valamint a piaci visszacsatolás ívével a Product szintről vissza a Lead szintre">
+          <text x="180" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="currentColor">LEAD</text>
+          <text x="380" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="currentColor">PROSPECT</text>
+          <text x="580" y="26" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="currentColor">PRODUCT</text>
+
+          <text x="20" y="110" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="currentColor">Domain gazda</text>
+          <text x="20" y="190" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="currentColor">Dev lead / agent overseer</text>
+          <text x="20" y="270" font-family="IBM Plex Sans, sans-serif" font-size="12.5" fill="currentColor">Sales</text>
+
+          <line x1="20" y1="50" x2="700" y2="50" stroke="currentColor" stroke-width="1" opacity=".25"/>
+
+          <!-- domain gazda: erős Lead/Prospectnél, csillapodik Productnél -->
+          <circle cx="180" cy="105" r="18" fill="var(--accent)"/>
+          <circle cx="380" cy="105" r="15" fill="var(--accent)"/>
+          <circle cx="580" cy="105" r="9" fill="var(--accent)" opacity=".7"/>
+
+          <!-- dev lead / agent overseer: Prospectnél a legerősebb -->
+          <circle cx="180" cy="185" r="6" fill="var(--ink-faint)"/>
+          <circle cx="380" cy="185" r="20" fill="var(--accent)"/>
+          <circle cx="580" cy="185" r="13" fill="var(--accent)" opacity=".8"/>
+
+          <!-- sales: Productnél csúcsosodik -->
+          <circle cx="180" cy="265" r="6" fill="var(--ink-faint)"/>
+          <circle cx="380" cy="265" r="12" fill="var(--accent)" opacity=".8"/>
+          <circle cx="580" cy="265" r="18" fill="var(--accent)"/>
+
+          <!-- dev lead beleszól a feasibility döntésbe is -->
+          <path d="M 360 172 C 280 144, 220 144, 184 178" fill="none" stroke="var(--ink-soft)" stroke-width="1.3" stroke-dasharray="1 4" marker-end="url(#kp-arrow)"/>
+          <text x="272" y="136" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">műszaki reality-check</text>
+
+          <!-- domain gazda tudása táplálja a sales-t is -->
+          <path d="M 580 114 C 624 150, 624 220, 580 256" fill="none" stroke="var(--ink-soft)" stroke-width="1.3" stroke-dasharray="1 4" marker-end="url(#kp-arrow)"/>
+          <text x="632" y="190" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--ink-faint)">domain-tudás</text>
+
+          <!-- feedback loop -->
+          <path d="M 580 292 C 580 320, 180 320, 180 292" fill="none" stroke="var(--accent-strong)" stroke-width="1.6" stroke-dasharray="2 5" marker-end="url(#kp-arrow)"/>
+          <text x="380" y="335" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing=".4" fill="var(--accent-strong)">piaci jelzés → új lead</text>
+        </svg>
+      </div>
+      <figcaption>A pont mérete a szerep aktivitását jelzi az adott szinten. A domain gazda elöl indít és lassan enged el, de a tudása a Product szintig elkíséri a sales-t is. A dev lead Prospectnél a legerősebb, de már a Lead-kapunál is beleszól, mint műszaki reality-check. A sales Productnél csúcsosodik ki, és onnan egy visszacsatoló ív viszi az új piaci jelzéseket a következő Lead felé.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="rail"><span class="tag">Portfólió</span><span class="sub">jelenlegi kövek</span></div>
+  <div class="body-col">
+    <h2>Hat aktív szál</h2>
+    <p>Öt kő és egy parittya van jelenleg kézben. Négy a rendes, gazdasági léptékű portfólió; az ötödik, a manipular, nem erre a létrára való — egy nem gazdasági célú, baráti/jótékonysági projekt, ezért nem Lead/Prospect/Product jelöléssel, hanem külön, "charity" címkével szerepel. A besorolás a repók mai állapotán alapuló becslés — ha valamelyik szintet másképp látod, ez a legkönnyebben javítható sor az egész anyagban.</p>
+
+    <div class="portfolio">
+      <div class="pf-card">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="ConstructionCalculator ikon">
+            <rect x="6" y="26" width="28" height="8" rx="1" fill="currentColor" opacity=".55"/>
+            <rect x="10" y="16" width="20" height="8" rx="1" fill="currentColor" opacity=".75"/>
+            <rect x="14" y="6" width="12" height="8" rx="1" fill="currentColor"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">concon <span style="font-weight:400;color:var(--ink-faint);font-size:15px">(ConstructionCalculator)</span></div>
+            <span class="pf-code">kódnév: Gránit</span>
+          </div>
+        </div>
+        <div class="pf-domain">Építőipari operációs rendszer — a piactér és az escrow-fizetés csak a belépő; tételes árbecslés, kivitelezői árazás és a köré épülő teljes munkafolyamat sokkal szélesebb, mint egy egyszerű kalkulátor.</div>
+        <div class="pf-foot"><span class="stage-pill prospect"><span class="dot"></span>Prospect</span></div>
+      </div>
+
+      <div class="pf-card">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="Bearing ikon">
+            <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1" opacity=".5"/>
+            <line x1="20" y1="20" x2="29" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="2.2" fill="currentColor"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">eeas <span style="font-weight:400;color:var(--ink-faint);font-size:15px">(Bearing)</span></div>
+            <span class="pf-code">kódnév: Pala</span>
+          </div>
+        </div>
+        <div class="pf-domain">Célvezérelt külsőkörnyezet-elemző radar közepes gyártó/szolgáltató cégeknek EU-ban és UK-ban — vállalati kockázatkezelés a cég saját céljaira vetítve.</div>
+        <div class="pf-foot"><span class="stage-pill lead"><span class="dot"></span>Lead</span></div>
+      </div>
+
+      <div class="pf-card">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="FiveStones ikon">
+            <circle cx="11" cy="11" r="3.6" fill="currentColor"/>
+            <circle cx="29" cy="11" r="3.6" fill="currentColor"/>
+            <circle cx="20" cy="20" r="3.6" fill="currentColor"/>
+            <circle cx="11" cy="29" r="3.6" fill="currentColor"/>
+            <circle cx="29" cy="29" r="3.6" fill="currentColor"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">school-commander <span style="font-weight:400;color:var(--ink-faint);font-size:15px">(FiveStones)</span></div>
+            <span class="pf-code">a név már eleve talált</span>
+          </div>
+        </div>
+        <div class="pf-domain">EdTech operációs rendszer: adminisztráció és órarend-optimalizálás az alap, hosszú távon háromoldalú piactérrel (magántanár-keresés, tanári megbízások, megosztott tananyagok).</div>
+        <div class="pf-foot"><span class="stage-pill lead"><span class="dot"></span>Lead</span></div>
+      </div>
+
+      <div class="pf-card">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="wordcloud ikon">
+            <circle cx="14" cy="17" r="9" fill="currentColor" opacity=".85"/>
+            <circle cx="27" cy="14" r="6" fill="currentColor" opacity=".65"/>
+            <circle cx="22" cy="27" r="5" fill="currentColor" opacity=".5"/>
+            <circle cx="10" cy="28" r="4" fill="currentColor" opacity=".4"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">wordcloud</div>
+            <span class="pf-code">kódnév: Kavics</span>
+          </div>
+        </div>
+        <div class="pf-domain">Mentimeter-stílusú, letölthető wordcloud-generátor CSV/XLS adatból — kis méretű, önálló mikro-eszköz, aktív Jira-sprintekkel és CI-vel.</div>
+        <div class="pf-foot"><span class="stage-pill prospect"><span class="dot"></span>Prospect</span></div>
+      </div>
+
+      <div class="pf-card charity" style="grid-column:1 / -1">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="Testudo ikon">
+            <path d="M6 30 A14 14 0 0 1 34 30 Z" fill="currentColor" opacity=".85"/>
+            <line x1="14" y1="30" x2="14" y2="21.5" stroke="var(--surface)" stroke-width="1.6"/>
+            <line x1="20" y1="30" x2="20" y2="16" stroke="var(--surface)" stroke-width="1.6"/>
+            <line x1="26" y1="30" x2="26" y2="21.5" stroke="var(--surface)" stroke-width="1.6"/>
+            <line x1="6" y1="30" x2="34" y2="30" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">manipular</div>
+            <span class="pf-code">kódnév: Testudo</span>
+          </div>
+        </div>
+        <div class="pf-domain">Háromfős kooperatív, gamifikált szokás-/célteljesítés-követő minijáték, a künoszkephalai csata témájára építve — nem bevételi cél, hanem baráti/jótékonysági kezdeményezés.</div>
+        <div class="pf-foot"><span class="stage-pill charity"><span class="dot"></span>Charity</span></div>
+      </div>
+
+      <div class="pf-card tool" style="grid-column:1 / -1">
+        <div class="pf-head">
+          <svg class="pf-icon" viewBox="0 0 40 40" role="img" aria-label="Dev-workflow ikon">
+            <line x1="20" y1="34" x2="8" y2="8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="20" y1="34" x2="32" y2="8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="13" y1="19.5" x2="27" y2="19.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="20" cy="19.5" r="4.4" fill="currentColor"/>
+          </svg>
+          <div class="pf-titles">
+            <div class="pf-name">dev-workflow</div>
+            <span class="pf-code">jelenlegi generáció: Csúzli</span>
+          </div>
+        </div>
+        <div class="pf-domain">A Jira-intake → TDD-implementáció → code review → CI teszt-env → review-kapu állapotgép, ami minden más terméket épít. A csomagolt, több repóba disztribuálható forma korai, még publikálatlan fázisban van.</div>
+        <div class="pf-foot"><span class="stage-pill devtool"><span class="dot"></span>Dev tool</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="foot">Munkanév: <strong>thefirstsmoothstone</strong> — Dávid első, földobott köve, mielőtt bármi mást választott volna. &middot; A Lead/Prospect/Product besorolás, valamint a fajsúly/keménység/tét-térkép koordinátái a repók 2026. szeptemberi állapotán alapuló, felülvizsgálandó becslések, nem véglegesített státuszok. &middot; A dev-workflow generációnevei (Csúzli, Parittya, Szkorpió, Trebuchet, Ágyú) munkanevek a tényleges semver mellett, nem hivatalos verziószám.</p>
+
+</div>

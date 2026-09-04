@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --ground:#EAE7DE; --surface:#F6F4ED; --surface-2:#DEDACC;
+      --ink:#23261F; --ink-soft:#565A4A; --ink-faint:#8B8F7C;
+      --line:#CFC9B7;
+      --accent:#4C6952; --accent-strong:#33473A; --accent-soft:#DBE3D4;
+      --stone-1:#C7BFA3; --stone-2:#8C824F; --stone-3:#33473A;
+      --charity:#9C6B33; --charity-soft:#EFE2CD;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: var(--accent-strong); }
+    a:hover { color: var(--accent); }
+  </style>
+</helmet>
+
+<div style="width:1123px; height:1768px; background:var(--ground); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; padding:60px 64px 40px; display:flex; flex-direction:column; gap:26px;">
+
+  <!-- HEADER -->
+  <div style="display:flex; flex-direction:column; gap:8px; border-bottom:2px solid var(--ink); padding-bottom:24px;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <svg width="56" height="56" viewBox="0 0 64 64" role="img" aria-label="thefirstsmoothstone embléma">
+        <circle cx="32" cy="32" r="29" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <line x1="32" y1="48" x2="20" y2="21" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="32" y1="48" x2="44" y2="21" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="25.5" y1="33.5" x2="38.5" y2="33.5" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="32" cy="33.5" r="4.6" fill="var(--accent)"/>
+        <g stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" opacity=".75">
+          <line x1="44" y1="15" x2="51" y2="15"/>
+          <line x1="47.5" y1="11.5" x2="47.5" y2="18.5"/>
+          <line x1="44.9" y1="12.4" x2="50.1" y2="17.6"/>
+          <line x1="44.9" y1="17.6" x2="50.1" y2="12.4"/>
+        </g>
+      </svg>
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);">Bemutató · 2026. szeptember</div>
+    </div>
+    <div style="font-family:'Fraunces', Georgia, serif; font-weight:900; font-size:96px; line-height:.94; letter-spacing:-.01em;">thefirstsmoothstone</div>
+    <div style="font-family:'Fraunces', Georgia, serif; font-weight:600; font-style:italic; font-size:28px; color:var(--accent-strong); margin-top:4px;">Már az első kő talál.</div>
+    <div style="font-size:17px; line-height:1.55; color:var(--ink-soft); max-width:900px; margin-top:6px;">Kicsi, mesterséges intelligencia ügynökökkel felfegyverzett fejlesztőműhely, ami valódi, validált problémákra épít szoftvert — miközben a szerszám, amivel farag, maga is egyre nagyobb géppé érik.</div>
+  </div>
+
+  <!-- THREE PILLARS -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);">
+    <div style="background:var(--surface); padding:20px 18px; display:flex; flex-direction:column; gap:8px;">
+      <svg width="28" height="28" viewBox="0 0 34 34"><path d="M17 4 L28 12 L24 28 L10 28 L6 12 Z" fill="var(--accent)" opacity=".92"/></svg>
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);">1. láb</div>
+      <div style="font-family:'Fraunces', serif; font-weight:700; font-size:18px;">A kő — saját termékek</div>
+      <div style="font-size:13.5px; line-height:1.45; color:var(--ink-soft);">SaaS, micro-SaaS, dobozos szoftver — validált problémára, saját tulajdonban.</div>
+    </div>
+    <div style="background:var(--surface); padding:20px 18px; display:flex; flex-direction:column; gap:8px;">
+      <svg width="28" height="28" viewBox="0 0 34 34">
+        <line x1="17" y1="29" x2="7" y2="6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="17" y1="29" x2="27" y2="6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="11" y1="16.5" x2="23" y2="16.5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="17" cy="16.5" r="3.6" fill="var(--accent)"/>
+      </svg>
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);">2. láb</div>
+      <div style="font-family:'Fraunces', serif; font-weight:700; font-size:18px;">A parittya — dev-workflow</div>
+      <div style="font-size:13.5px; line-height:1.45; color:var(--ink-soft);">A saját fejlesztési módszertan, ami minden terméket épít — maga is termékké érik.</div>
+    </div>
+    <div style="background:var(--surface); padding:20px 18px; display:flex; flex-direction:column; gap:8px;">
+      <svg width="28" height="28" viewBox="0 0 34 34">
+        <path d="M6 24 L20 10 L25 15 L11 29 Z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="17" y1="13" x2="22" y2="18" stroke="var(--accent)" stroke-width="2"/>
+      </svg>
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);">3. láb</div>
+      <div style="font-family:'Fraunces', serif; font-weight:700; font-size:18px;">Megrendelésre faragva</div>
+      <div style="font-size:13.5px; line-height:1.45; color:var(--ink-soft);">Contractor fejlesztés, AI-bevezetési tanácsadás, product engineer / mgr megbízás.</div>
+    </div>
+  </div>
+
+  <!-- LADDER -->
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <div style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);">Létra — két kapu, három szint</div>
+    <div style="background:var(--surface); border:1px solid var(--line); padding:18px 22px;">
+      <svg viewBox="0 0 995 108" width="995" height="108" role="img" aria-label="Lead, Prospect, Product szint két kapuval">
+        <rect x="10" y="10" width="220" height="80" rx="3" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        <text x="120" y="42" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="1.5" fill="var(--ink)">LEAD</text>
+        <text x="120" y="64" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="var(--ink-soft)">potenciál-vizsgálat</text>
+
+        <rect x="388" y="10" width="220" height="80" rx="3" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+        <text x="498" y="42" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="1.5" fill="var(--ink)">PROSPECT</text>
+        <text x="498" y="64" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="var(--ink-soft)">fejlesztés zajlik</text>
+
+        <rect x="766" y="10" width="220" height="80" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="876" y="42" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="1.5" fill="var(--accent-strong)">PRODUCT</text>
+        <text x="876" y="64" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="var(--accent-strong)">fizetős fal mögött</text>
+
+        <defs>
+          <marker id="pv-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L8,4 L0,8 Z" fill="var(--ink)"/>
+          </marker>
+        </defs>
+        <line x1="232" y1="50" x2="385" y2="50" stroke="var(--ink)" stroke-width="1.6" marker-end="url(#pv-arrow)"/>
+        <text x="308" y="36" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">feasibility-kapu</text>
+        <line x1="610" y1="50" x2="763" y2="50" stroke="var(--ink)" stroke-width="1.6" marker-end="url(#pv-arrow)"/>
+        <text x="686" y="36" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-faint)">fizetős fal</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- KŐ ÉS KOVÁCSMŰHELY -->
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <div style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);">Kör — a kő és a kovácsműhely</div>
+    <div style="background:var(--surface); border:1px solid var(--line); padding:18px 22px;">
+      <svg viewBox="0 0 995 250" width="995" height="250" role="img" aria-label="A termékek csiszolják a dev-workflow kovácsműhelyt, a kovácsműhely pedig formálja a következő terméket — a jelenlegi generáció a Csúzli">
+        <defs>
+          <marker id="fw-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L8,4 L0,8 Z" fill="var(--accent-strong)"/>
+          </marker>
+        </defs>
+
+        <rect x="30" y="95" width="290" height="90" rx="3" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+        <text x="175" y="122" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.2" fill="var(--ink-faint)">A KÖVEK</text>
+        <text x="175" y="148" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="20" fill="var(--ink)">Termékek</text>
+        <text x="175" y="170" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--ink-soft)">öt aktív szál</text>
+
+        <rect x="675" y="95" width="290" height="90" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="820" y="122" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.2" fill="var(--accent-strong)">A KOVÁCSMŰHELY</text>
+        <text x="820" y="148" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="20" fill="var(--accent-strong)">Dev-workflow</text>
+        <text x="820" y="170" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="var(--accent-strong)">jelenleg: Csúzli</text>
+
+        <path d="M 320 115 C 500 20, 500 20, 675 115" fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#fw-arrow)"/>
+        <text x="497" y="58" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="var(--ink)">minden termék csiszolja a kovácsműhelyt</text>
+
+        <path d="M 675 165 C 500 245, 500 245, 320 165" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-dasharray="2 5" marker-end="url(#fw-arrow)"/>
+        <text x="497" y="218" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="var(--ink-soft)">a kovácsműhely formálja a következő követ</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ROLES -->
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <div style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);">Szerepek — ki tart a kőben</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);">
+      <div style="background:var(--surface); padding:16px 18px;">
+        <div style="font-family:'Fraunces', serif; font-weight:700; font-size:15.5px; margin-bottom:5px;">Domain gazda</div>
+        <div style="font-size:13px; line-height:1.45; color:var(--ink-soft);">Ismeri a domaint — dönt, valódi problémára mutat-e a jelzés.</div>
+      </div>
+      <div style="background:var(--surface); padding:16px 18px;">
+        <div style="font-family:'Fraunces', serif; font-weight:700; font-size:15.5px; margin-bottom:5px;">Dev lead / agent overseer</div>
+        <div style="font-size:13px; line-height:1.45; color:var(--ink-soft);">Felügyeli az AI-ügynökök munkáját, tartja a minőségi kaput.</div>
+      </div>
+      <div style="background:var(--surface); padding:16px 18px;">
+        <div style="font-family:'Fraunces', serif; font-weight:700; font-size:15.5px; margin-bottom:5px;">Sales</div>
+        <div style="font-size:13px; line-height:1.45; color:var(--ink-soft);">Piacra viszi a terméket, a jelzést visszavezeti a roadmapbe.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <div style="font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);">Portfólió — hat aktív szál</div>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);">
+
+      <div style="background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <rect x="6" y="26" width="28" height="8" rx="1" fill="var(--accent-strong)" opacity=".55"/>
+            <rect x="10" y="16" width="20" height="8" rx="1" fill="var(--accent-strong)" opacity=".75"/>
+            <rect x="14" y="6" width="12" height="8" rx="1" fill="var(--accent-strong)"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">concon <span style="font-weight:400; color:var(--ink-faint); font-size:13px;">(ConstructionCalculator)</span></div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-top:2px;">kódnév: Gránit</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">Építőipari operációs rendszer — a piactér és az escrow csak a belépő.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--stone-2);"></span>Prospect</div>
+      </div>
+
+      <div style="background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="15" fill="none" stroke="var(--accent-strong)" stroke-width="1.6"/>
+            <circle cx="20" cy="20" r="9" fill="none" stroke="var(--accent-strong)" stroke-width="1" opacity=".5"/>
+            <line x1="20" y1="20" x2="29" y2="11" stroke="var(--accent-strong)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="2.2" fill="var(--accent-strong)"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">eeas <span style="font-weight:400; color:var(--ink-faint); font-size:13px;">(Bearing)</span></div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-top:2px;">kódnév: Pala</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">Célvezérelt külsőkörnyezet-radar közepes cégeknek EU-ban és UK-ban.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--stone-1);"></span>Lead</div>
+      </div>
+
+      <div style="background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <circle cx="11" cy="11" r="3.6" fill="var(--accent-strong)"/>
+            <circle cx="29" cy="11" r="3.6" fill="var(--accent-strong)"/>
+            <circle cx="20" cy="20" r="3.6" fill="var(--accent-strong)"/>
+            <circle cx="11" cy="29" r="3.6" fill="var(--accent-strong)"/>
+            <circle cx="29" cy="29" r="3.6" fill="var(--accent-strong)"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">school-commander <span style="font-weight:400; color:var(--ink-faint); font-size:13px;">(FiveStones)</span></div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-top:2px;">a név már eleve talált</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">EdTech operációs rendszer — adminisztráció, órarend és piactér-vízió.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--stone-1);"></span>Lead</div>
+      </div>
+
+      <div style="background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <circle cx="14" cy="17" r="9" fill="var(--accent-strong)" opacity=".85"/>
+            <circle cx="27" cy="14" r="6" fill="var(--accent-strong)" opacity=".65"/>
+            <circle cx="22" cy="27" r="5" fill="var(--accent-strong)" opacity=".5"/>
+            <circle cx="10" cy="28" r="4" fill="var(--accent-strong)" opacity=".4"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">wordcloud</div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-top:2px;">kódnév: Kavics</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">Mentimeter-stílusú wordcloud-generátor, kis önálló mikro-eszköz.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--stone-2);"></span>Prospect</div>
+      </div>
+
+      <div style="background:var(--charity-soft); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <path d="M6 30 A14 14 0 0 1 34 30 Z" fill="var(--accent-strong)" opacity=".85"/>
+            <line x1="14" y1="30" x2="14" y2="21.5" stroke="var(--charity-soft)" stroke-width="1.6"/>
+            <line x1="20" y1="30" x2="20" y2="16" stroke="var(--charity-soft)" stroke-width="1.6"/>
+            <line x1="26" y1="30" x2="26" y2="21.5" stroke="var(--charity-soft)" stroke-width="1.6"/>
+            <line x1="6" y1="30" x2="34" y2="30" stroke="var(--accent-strong)" stroke-width="2"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">manipular</div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--charity); margin-top:2px;">kódnév: Testudo</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">Kooperatív gamifikált célteljesítés-játék — baráti/jótékonysági kezdeményezés.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--charity);"></span>Charity</div>
+      </div>
+
+      <div style="background:var(--accent-soft); padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 40 40">
+            <line x1="20" y1="34" x2="8" y2="8" stroke="var(--accent-strong)" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="20" y1="34" x2="32" y2="8" stroke="var(--accent-strong)" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="13" y1="19.5" x2="27" y2="19.5" stroke="var(--accent-strong)" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="20" cy="19.5" r="4.4" fill="var(--accent-strong)"/>
+          </svg>
+          <div>
+            <div style="font-family:'Fraunces', serif; font-weight:700; font-size:17px;">dev-workflow</div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-strong); margin-top:2px;">jelenlegi generáció: Csúzli</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px; line-height:1.45; color:var(--ink-soft);">Jira → TDD → code review → CI állapotgép, ami minden más terméket épít.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px 3px 7px; border-radius:20px; border:1px solid var(--line); width:fit-content;"><span style="width:8px; height:8px; border-radius:50%; background:var(--accent-strong);"></span>Dev tool</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="border-top:1px solid var(--line); padding-top:16px; font-size:11.5px; line-height:1.5; color:var(--ink-faint);">Munkanév: <strong style="color:var(--ink-soft);">thefirstsmoothstone</strong> — Dávid első, földobott köve. A Lead/Prospect/Product besorolás felülvizsgálandó becslés a repók 2026. szeptemberi állapota alapján.</div>
+
+</div>
+</x-dc>
+</body>
+</html>
