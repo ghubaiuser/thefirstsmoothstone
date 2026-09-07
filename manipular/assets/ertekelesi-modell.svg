@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc">
+  <title id="title">A jellemértékelés folyamata</title>
+  <desc id="desc">A játékosi és verifikátori belépő interjú lezárt profilt hoz létre. A hét hét viselkedési adatai módosítják, majd záró interjú, jelentéstervezet, emberi jóváhagyás és négygörbés jellemrajz következik.</desc>
+  <defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 z" fill="#b76933"/></marker></defs>
+  <rect width="1440" height="820" fill="#f4efe4"/>
+  <text x="720" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#142726">A JELLEMRAJZ NEM EGYETLEN PONTSZÁM</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="130" width="250" height="105" rx="18" fill="#ffffff" stroke="#176b68" stroke-width="4"/>
+    <text x="195" y="172" text-anchor="middle" font-size="21" font-weight="700" fill="#142726">JÁTÉKOSI INTERJÚ</text>
+    <text x="195" y="205" text-anchor="middle" font-size="18" fill="#526866">önkép</text>
+    <rect x="70" y="275" width="250" height="105" rx="18" fill="#ffffff" stroke="#176b68" stroke-width="4"/>
+    <text x="195" y="317" text-anchor="middle" font-size="19" font-weight="700" fill="#142726">VERIFIKÁTORI INTERJÚ</text>
+    <text x="195" y="350" text-anchor="middle" font-size="18" fill="#526866">külső kép</text>
+    <line x1="320" y1="182" x2="410" y2="245" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <line x1="320" y1="328" x2="410" y2="265" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="430" y="170" width="280" height="170" rx="22" fill="#152927" stroke="#176b68" stroke-width="4"/>
+    <path d="M535 215 h70 v25 h20 v60 h-110 v-60 h20z" fill="#d7b285"/>
+    <text x="570" y="315" text-anchor="middle" font-size="21" font-weight="700" fill="#ffffff">LEPECSÉTELT PROFIL</text>
+    <text x="570" y="370" text-anchor="middle" font-size="18" fill="#526866">a játékos nem látja</text>
+    <line x1="710" y1="255" x2="800" y2="255" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="820" y="130" width="270" height="250" rx="22" fill="#e8f2f0" stroke="#176b68" stroke-width="4"/>
+    <text x="955" y="177" text-anchor="middle" font-size="22" font-weight="700" fill="#142726">7 HÉT BIZONYÍTÉK</text>
+    <text x="860" y="225" font-size="18" fill="#526866">• teljesítés és kudarc</text>
+    <text x="860" y="265" font-size="18" fill="#526866">• nehézség és ismétlés</text>
+    <text x="860" y="305" font-size="18" fill="#526866">• csapathelyzetek</text>
+    <text x="860" y="345" font-size="18" fill="#526866">• bizonytalanság</text>
+    <line x1="1090" y1="255" x2="1175" y2="255" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="1195" y="130" width="180" height="250" rx="22" fill="#ffffff" stroke="#8a4f2f" stroke-width="4"/>
+    <text x="1285" y="177" text-anchor="middle" font-size="20" font-weight="700" fill="#142726">ZÁRÓ INTERJÚK</text>
+    <text x="1285" y="225" text-anchor="middle" font-size="17" fill="#526866">játékos</text>
+    <text x="1285" y="258" text-anchor="middle" font-size="17" fill="#526866">verifikátor</text>
+    <text x="1285" y="291" text-anchor="middle" font-size="17" fill="#526866">csapat</text>
+    <line x1="1285" y1="380" x2="1285" y2="455" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="1040" y="475" width="330" height="115" rx="20" fill="#ffffff" stroke="#176b68" stroke-width="4"/>
+    <text x="1205" y="520" text-anchor="middle" font-size="21" font-weight="700" fill="#142726">JELENTÉSTERVEZET</text>
+    <text x="1205" y="555" text-anchor="middle" font-size="17" fill="#526866">minden állítás forrásra vezet</text>
+    <line x1="1040" y1="532" x2="950" y2="532" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="660" y="475" width="270" height="115" rx="20" fill="#d7b285" stroke="#8a4f2f" stroke-width="4"/>
+    <text x="795" y="520" text-anchor="middle" font-size="21" font-weight="700" fill="#142726">EMBERI REVIEW</text>
+    <text x="795" y="555" text-anchor="middle" font-size="17" fill="#4e3a2d">központi segítő</text>
+    <line x1="660" y1="532" x2="570" y2="532" stroke="#b76933" stroke-width="5" marker-end="url(#a)"/>
+    <rect x="70" y="445" width="480" height="245" rx="22" fill="#ffffff" stroke="#176b68" stroke-width="4"/>
+    <text x="310" y="492" text-anchor="middle" font-size="23" font-weight="700" fill="#142726">VÉGSŐ JELLEMRAJZ</text>
+    <polygon points="310,525 380,560 365,640 310,670 255,640 240,560" fill="#dcecea" stroke="#176b68" stroke-width="3"/>
+    <polygon points="310,540 360,570 350,622 310,650 270,625 258,570" fill="none" stroke="#3d73a7" stroke-width="5"/>
+    <polygon points="310,555 345,568 355,610 310,637 282,615 274,578" fill="none" stroke="#b76933" stroke-width="5"/>
+    <text x="110" y="620" font-size="17" fill="#526866">önkép • külső kép</text>
+    <text x="110" y="650" font-size="17" fill="#526866">viselkedés • összegzés</text>
+    <text x="720" y="760" text-anchor="middle" font-size="22" fill="#526866">A jelentés a hét hétben megfigyelt működést írja le, nem végleges személyiségítéletet.</text>
+  </g>
+</svg>

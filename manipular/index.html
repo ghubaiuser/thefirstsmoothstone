@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Manipular biblikus, gamifikált jellemfejlesztő PWA termékkoncepciója és működési leírása.">
+  <title>Manipular biblikus jellemfejlesztő hadjárat – Termékkoncepció és működési leírás</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #142726;
+      --muted: #526866;
+      --teal: #176b68;
+      --teal-soft: #e8f2f0;
+      --bronze: #b76933;
+      --bronze-soft: #ead5b8;
+      --paper: #fbfaf6;
+      --canvas: #f4efe4;
+      --line: #d6ccbc;
+      --red: #c93737;
+      --red-dark: #8f1f1f;
+      --red-soft: #fff4f4;
+      --white: #ffffff;
+      --shadow: 0 18px 46px rgba(20, 39, 38, 0.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font: 17px/1.68 Georgia, 'Times New Roman', serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--teal); text-underline-offset: 0.18em; }
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      place-items: center;
+      padding: 72px 24px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 18% 22%, rgba(215,178,133,.20), transparent 30%),
+        linear-gradient(135deg, #0e2221 0%, #173b38 62%, #8a4f2f 140%);
+    }
+    .hero-inner { width: min(1040px, 100%); }
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--bronze-soft);
+      font: 700 13px/1.2 Arial, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 900px;
+      margin: 0;
+      font: 800 clamp(44px, 8vw, 92px)/.98 Arial, sans-serif;
+      letter-spacing: -.045em;
+    }
+    .hero .subtitle {
+      max-width: 760px;
+      margin: 30px 0 22px;
+      color: #edf4f2;
+      font: 400 clamp(21px, 3vw, 31px)/1.35 Arial, sans-serif;
+    }
+    .hero .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      color: #d7e4e2;
+      font: 500 14px/1.4 Arial, sans-serif;
+    }
+    .hero .mark {
+      width: 76px;
+      height: 7px;
+      margin-top: 42px;
+      background: var(--bronze);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 255px minmax(0, 850px);
+      gap: 58px;
+      justify-content: center;
+      align-items: start;
+      padding: 58px 28px 100px;
+    }
+    nav {
+      position: sticky;
+      top: 28px;
+      max-height: calc(100vh - 56px);
+      overflow: auto;
+      padding: 24px 22px;
+      border: 1px solid var(--line);
+      background: rgba(251,250,246,.92);
+      box-shadow: 0 8px 30px rgba(20,39,38,.06);
+      backdrop-filter: blur(10px);
+    }
+    nav h2 {
+      margin: 0 0 13px;
+      color: var(--muted);
+      font: 700 12px/1.2 Arial, sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    nav ol { margin: 0; padding-left: 1.25rem; }
+    nav li { margin: 0 0 9px; color: var(--muted); font: 500 13px/1.35 Arial, sans-serif; }
+    nav a { color: inherit; text-decoration: none; }
+    nav a:hover { color: var(--teal); text-decoration: underline; }
+    article {
+      padding: 54px 68px 78px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    article > :first-child { margin-top: 0; }
+    article h1, article h2, article h3 {
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+      line-height: 1.18;
+      text-wrap: balance;
+      scroll-margin-top: 28px;
+    }
+    article h1 {
+      margin: 3.2rem 0 1.25rem;
+      padding-top: 1.05rem;
+      border-top: 4px solid var(--bronze);
+      font-size: 2.05rem;
+      letter-spacing: -.025em;
+    }
+    article h2 { margin: 2.1rem 0 .75rem; font-size: 1.42rem; }
+    article h3 { margin: 1.6rem 0 .55rem; font-size: 1.15rem; }
+    article p { margin: 0 0 1rem; }
+    article ul, article ol { padding-left: 1.35rem; }
+    article li { margin: .25rem 0; }
+    strong { color: var(--ink); }
+    blockquote {
+      margin: 1.6rem 0;
+      padding: 18px 22px;
+      border-left: 5px solid var(--teal);
+      background: var(--teal-soft);
+      font-size: 1.04em;
+    }
+    blockquote p:last-child { margin-bottom: 0; }
+    blockquote.open-work {
+      border: 4px solid var(--red);
+      background: var(--red-soft);
+      color: #3f2424;
+      box-shadow: 0 6px 0 rgba(201,55,55,.10);
+    }
+    blockquote.open-work strong { color: var(--red-dark); }
+    figure { margin: 2.25rem -34px; }
+    figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+    figcaption { margin-top: .65rem; color: var(--muted); font: 500 13px/1.45 Arial, sans-serif; text-align: center; }
+    .table-wrap { margin: 1.5rem 0 2rem; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font: 500 14px/1.42 Arial, sans-serif; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--white); background: var(--teal); font-weight: 700; }
+    tr:nth-child(even) td { background: #f1f5f3; }
+    pre {
+      overflow-x: auto;
+      padding: 18px;
+      border-left: 5px solid var(--bronze);
+      background: #142726;
+      color: #eff5f3;
+      font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    footer { padding: 30px 24px 54px; color: var(--muted); font: 500 13px/1.45 Arial, sans-serif; text-align: center; }
+    @media (max-width: 1040px) {
+      .layout { grid-template-columns: minmax(0, 850px); }
+      nav { position: static; max-height: none; }
+      nav ol { columns: 2; column-gap: 28px; }
+    }
+    @media (max-width: 680px) {
+      body { font-size: 16px; }
+      .hero { min-height: auto; padding: 58px 22px; }
+      .layout { padding: 24px 0 0; }
+      nav { margin: 0 16px; }
+      nav ol { columns: 1; }
+      article { padding: 40px 22px 64px; box-shadow: none; }
+      article h1 { font-size: 1.65rem; }
+      figure { margin: 1.75rem 0; }
+    }
+    @media print {
+      @page { size: letter; margin: 18mm 17mm 18mm 19mm; }
+      body { background: #fff; font-size: 10.6pt; }
+      .hero { min-height: 235mm; page-break-after: always; padding: 20mm; print-color-adjust: exact; }
+      .hero h1 { font-size: 50pt; }
+      nav { display: none; }
+      .layout { display: block; padding: 0; }
+      article { width: auto; padding: 0; box-shadow: none; }
+      article h1 { page-break-before: auto; break-after: avoid; }
+      article h2, article h3 { break-after: avoid; }
+      figure, table, blockquote, pre { break-inside: avoid; }
+      figure { margin: 8mm 0; }
+      footer { display: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Manipular · első programcsomag</p>
+      <h1>Manipular biblikus jellemfejlesztő hadjárat</h1>
+      <p class="subtitle">Termékkoncepció és működési leírás</p>
+      <div class="meta"><span>Munkakoncepció a későbbi scoping előkészítéséhez</span><span>2026. szeptember</span><span>Magyar MVP</span></div>
+      <div class="mark" aria-hidden="true"></div>
+    </div>
+  </header>
+  <div class="layout">
+    <nav aria-label="Tartalomjegyzék">
+      <h2>Tartalom</h2>
+      <ol><li><a href="#vezetoi-osszefoglalo">Vezetői összefoglaló</a></li>
+<li><a href="#1-a-kiindulo-problema">1. A kiinduló probléma</a></li>
+<li><a href="#2-celcsoport-es-programkeret">2. Célcsoport és programkeret</a></li>
+<li><a href="#3-a-fuggetlenseg-elve">3. A függetlenség elve</a></li>
+<li><a href="#4-szerepkorok-es-felelossegek">4. Szerepkörök és felelősségek</a></li>
+<li><a href="#5-belepes-es-indulasi-kapu">5. Belépés és indulási kapu</a></li>
+<li><a href="#6-a-jellemrajz-es-az-ertekelesi-modell">6. A jellemrajz és az értékelési modell</a></li>
+<li><a href="#7-a-hethetes-hadjarat">7. A héthetes hadjárat</a></li>
+<li><a href="#8-a-kihivasrendszer">8. A kihívásrendszer</a></li>
+<li><a href="#9-jatekmechanika-es-taktika">9. Játékmechanika és taktika</a></li>
+<li><a href="#10-verifikator-mint-fejlodesi-szovetseges">10. Verifikátor mint fejlődési szövetséges</a></li>
+<li><a href="#11-szunet-kieses-es-kilepes">11. Szünet, kiesés és kilépés</a></li>
+<li><a href="#12-zaras-es-utravalo">12. Zárás és útravaló</a></li>
+<li><a href="#13-kozponti-mukodtetes">13. Központi működtetés</a></li>
+<li><a href="#14-adatvedelem-bizalom-es-biztonsag">14. Adatvédelem, bizalom és biztonság</a></li>
+<li><a href="#15-mvp-platform-es-technikai-irany">15. MVP-platform és technikai irány</a></li>
+<li><a href="#16-az-mvp-hatara">16. Az MVP határa</a></li>
+<li><a href="#17-definition-of-ready-a-scoping-korhoz">17. Definition of Ready a scoping körhöz</a></li>
+<li><a href="#18-a-ket-kiadando-munkacsomag">18. A két kiadandó munkacsomag</a></li>
+<li><a href="#19-fo-kockazatok-es-dilemmak">19. Fő kockázatok és dilemmák</a></li>
+<li><a href="#20-kovetkezo-lepesek">20. Következő lépések</a></li>
+<li><a href="#21-fogalomtar">21. Fogalomtár</a></li></ol>
+    </nav>
+    <article><h1 id="vezetoi-osszefoglalo">Vezetői összefoglaló</h1>
+<p>A <strong>Manipular</strong> egy hét héten át tartó, kooperatív, gamifikált jellemfejlesztő program 25–45 éves, házas, hívő vagy a hittel ismerkedő férfiak 3–4 fős, önként szerveződő csapatai számára. Nem facilitátor vezeti: az alkalmazás méri fel a kiinduló helyzetet, osztja ki a kihívásokat, tartja a heti ritmust, biztosítja az ellenőrzés keretét, vezeti a hadjáratot és állítja össze a záró értékelés tervezetét. Egyidejűleg 5–10 csapat fölött 1–2 központi segítő felügyeli az elakadásokat, a kivételeket és a jelentések jóváhagyását.</p>
+<p>A program első tartalmi és vizuális világa keresztény, biblikus és igealapú. A játék kerettörténete a künoszkephalai hadjáratból merít: a rugalmas római manipuláris hadrend a merev makedón falanx ellen küzd. A történet hadtörténeti ihletésű arcade metafora, nem történelmi szimuláció. A személyes fegyelem adja az egységek erejét, az együttműködés működteti az alakzatot, a rugalmas alkalmazkodás pedig hadászati előnnyé válik.</p>
+<p>A termék ígérete visszafogott és ellenőrizhető:</p>
+<blockquote class="principle">
+<p><strong>Segít tisztábban meglátni, hogyan működsz jelenleg, és megmutatja, mi változott benned a hét hét során.</strong></p>
+</blockquote>
+<p>A Manipular nem diagnosztizál, nem minősít véglegesen, és nem garantál személyiségváltozást. A belépő interjú egy kezdeti hipotézist ad, a kihívások pedig viselkedési bizonyítékokat gyűjtenek. A záró jelentés azt írja le, hogyan működött a játékos a program hét hete alatt, milyen mintázatok ismétlődtek, hol tért el az önképe a külső megfigyeléstől, és milyen következő lépések lehetnek hasznosak.</p>
+<figure><img src="assets/motor-programcsomag.png" alt="A motor, a programcsomag és az első kampány kapcsolata" loading="lazy"><figcaption>A motor, a programcsomag és az első kampány kapcsolata</figcaption></figure>
+<h2>A koncepció egy mondatban</h2>
+<p>A Manipular egy mobilközpontú PWA-ra épülő, alkalmazás által vezetett kooperatív hadjárat, amely egy rejtett belépő jellemprofil, kurált kihívások, verifikátori ellenőrzés és csapatesemények alapján a program végén bizonyítékokra visszavezethető egyéni és csapatjellemrajzot ad.</p>
+<h2>Miért érdemes elkészíteni?</h2>
+<ul>
+<li>A jellemfejlesztést nem elvont tananyagként, hanem hétköznapi cselekvések soraként kezeli.</li>
+<li>Az önértékelést külső, a játékost ismerő verifikátor nézőpontjával egészíti ki.</li>
+<li>A kooperáció és a közös következmények valós társas helyzeteket teremtenek.</li>
+<li>A játékos hét hétig nem látja a mögöttes pontszámokat, ezért kevésbé tud a kívánt eredményre rájátszani.</li>
+<li>A kihívások sikere, részleges sikere és kudarca konkrét példát ad a záró jellemzéshez.</li>
+<li>A keresztény program tartalma lecserélhető, mert a motor nem égeti be sem a jellemvonásokat, sem a kérdéseket, sem a történetet.</li>
+</ul>
+<h1 id="1-a-kiindulo-problema">1. A kiinduló probléma</h1>
+<h2>1.1 Az önismeret gyakran elszakad a viselkedéstől</h2>
+<p>Egy kérdőív megmutathatja, hogyan látja magát valaki, de keveset mond arról, hogyan működik, amikor fáradt, amikor nincs kedve, amikor mások számítanak rá, vagy amikor egy kudarc következménye a csapatot is érinti. A Manipular ezért a belépő önértékelést nem végső igazságnak, hanem kiinduló feltételezésnek tekinti.</p>
+<h2>1.2 A fejlődéshez ritmus és külső visszajelzés kell</h2>
+<p>A jó szándék gyakran nem válik rendszeres cselekvéssé. A program hét hétre állandó ritmust ad: öt építkező nap, egy közös csata és egy sabbat. A játékos mellett egy általa választott verifikátor is végig jelen van, és a privát egyéni feladatokról végleges ellenőrzési döntést hoz.</p>
+<h2>1.3 A csapat felerősíti a valós működést</h2>
+<p>Az egyéni kudarc először a játékos személyes erőforrását csökkenti, majd annak elfogyása után a közös készletet terheli. A csapat látja, ki okozta a levonást, de a privát feladat részleteit nem. Ez újabb jellemhelyzetet teremt: a társak támogatnak, megoldást keresnek, közömbösek maradnak vagy hibáztatnak. A reakció a csapatprofil része lehet.</p>
+<h2>1.4 A megfigyelés maga is beavatkozás</h2>
+<p>A program belső metaforája a „kinyitott doboz”: amikor a játékos elkezdi figyelni saját működését, már változik is. Emiatt a Manipular nem választja szét mereven a mérést és a fejlesztést. A kihívás egyszerre gyakorlat és adatforrás, a záró értékelés pedig ezt a kettősséget nyíltan kezeli.</p>
+<h1 id="2-celcsoport-es-programkeret">2. Célcsoport és programkeret</h1>
+<h2>2.1 Elsődleges célcsoport</h2>
+<ul>
+<li>25–45 éves férfiak;</li>
+<li>házasok;</li>
+<li>hívők vagy a keresztény hittel ismerkedők;</li>
+<li>önként vagy más javaslatára csatlakoznak, de a részvételhez saját kifejezett beleegyezésük kell;</li>
+<li>3–4 fős, lehetőleg már meglévő bizalmi kapcsolatokból szerveződő csapatban indulnak;</li>
+<li>vállalják a hét héten át tartó napi és heti ritmust;</li>
+<li>választanak egy csapaton kívüli, őket jól ismerő verifikátort.</li>
+</ul>
+<h2>2.2 Nem célcsoport</h2>
+<p>Az MVP nem terápiás, klinikai, krízisintervenciós vagy házassági tanácsadó szolgáltatás. Nem alkalmas arra, hogy mentális állapotot diagnosztizáljon, alkalmasságot igazoljon, munkahelyi vagy egyházi minősítést adjon, illetve a részvételt külső fél kikényszerítse. A jellemrajz nem használható rangsorolásra vagy mások feletti döntés igazolására.</p>
+<h2>2.3 Kohorsz és működtetés</h2>
+<p>Az első működési cél egyszerre 5–10 csapat, azaz 15–40 játékos és ugyanennyi verifikátor. A csapatok közös kohorsznapon indulnak, és ugyanabban a heti történeti fejezetben járnak, de egymás eredményét nem látják. Az MVP-ben nincs csapatok közötti ranglista, verseny vagy kohorszszintű együttműködés.</p>
+<p>Az egész kohorsz fölött 1–2 központi segítő dolgozik. Nem facilitálnak napi foglalkozásokat, és nem olvashatják szabadon a személyes adatokat. Az elakadásokat, inaktivitást, szüneteket és a záró jelentések jóváhagyását kezelik.</p>
+<h1 id="3-a-fuggetlenseg-elve">3. A függetlenség elve</h1>
+<h2>3.1 A motor nem azonos az üzemanyaggal</h2>
+<p>A rendszer legfontosabb architekturális elve, hogy a motor független marad a betöltött tartalomtól. A motor kezeli a szerepköröket, a programidőt, a feladatállapotokat, a kiosztást, a verifikációt, a játékbeli erőforrásokat, a jelentés-előkészítést és a jogosultságokat. A programcsomag adja meg, hogy mit jelent mindez egy konkrét programban.</p>
+<h2>3.2 Cserélhető programcsomag</h2>
+<p>A programcsomag legalább az alábbiakat tartalmazza:</p>
+<ul>
+<li>a jellemvonások száma, neve és definíciója;</li>
+<li>az egyéni és csapatdinamikai tengelyek;</li>
+<li>a játékosi és verifikátori belépő és záró interjúk;</li>
+<li>az értékelési és bizonytalansági szabályok;</li>
+<li>a címkézett kihíváskönyvtár;</li>
+<li>a heti történetek és csataforgatókönyvek;</li>
+<li>az erőforrások és azok játékbeli hatása;</li>
+<li>a jellemzéssablon, a hangnem és az engedett állítástípusok;</li>
+<li>a bibliai vagy más források;</li>
+<li>a lokalizált szövegek;</li>
+<li>a vizuális és gamifikációs prezentáció.</li>
+</ul>
+<p>Az első csomag biblikus, keresztény és igealapú. A motor ettől még később más számú jellemvonással, más kérdésekkel, más világnézeti kerettel és teljesen más történeti témával is használható.</p>
+<h2>3.3 Verziózás</h2>
+<p>Az MVP programcsomagja technikai admin által szerkesztett, verziózott és sémával ellenőrzött fájlokból áll. Egy elindított kohorsz végig ugyanahhoz a csomagverzióhoz van rögzítve. A későbbi módosítások csak új kohorszra érvényesek. Vizuális tartalomszerkesztő nem része az MVP-nek.</p>
+<blockquote class="open-work">
+<p>🟥 <strong>KIDOLGOZANDÓ 1 – JELLEMVONÁSRENDSZER.</strong> A hét egyéni jellemvonás, a csapattulajdonságok, az interjúk és az értékelési módszer szakirodalmi és biblikus megalapozása még nincs kész. E nélkül a programcsomag nem tekinthető tartalmilag indíthatónak.</p>
+</blockquote>
+<blockquote class="open-work">
+<p>🟥 <strong>KIDOLGOZANDÓ 2 – KIHÍVÁS- ÉS FORGATÓKÖNYVTÁR.</strong> A jellemvonásokhoz illesztett teljes héthetes kihíváskészlet, alternatívák, verifikátori feladatok és heti csaták még nincsenek kidolgozva. Ez a munkacsomag az első eredményére épül.</p>
+</blockquote>
+<h1 id="4-szerepkorok-es-felelossegek">4. Szerepkörök és felelősségek</h1>
+<h2>4.1 Játékos</h2>
+<p>A játékos kitölti a belépő és záró interjút, elfogadja a csapatszövetséget, teljesíti és beküldi a kihívásokat, részt vesz a csapatdöntésekben és a heti csatákban, valamint betartja a biztonsági és beleegyezési kereteket. A program alatt nem látja a jellemvonáscímkéket, a pontszámokat vagy a diagramokat.</p>
+<h2>4.2 Verifikátor</h2>
+<p>A verifikátort a játékos szabadon választja házastárs, rokon, barát, mentor vagy lelki vezető közül. Csapattag nem lehet ugyanannak a játékosnak a verifikátora. A verifikátor:</p>
+<ul>
+<li>külön kitölti a belépő és záró interjút;</li>
+<li>látja a rá tartozó privát kihívások teljesítési feltételeit;</li>
+<li>véglegesen elbírálja az egyéni beküldéseket;</li>
+<li>látja a rejtett jellemvonásokat és az ideiglenes trendeket;</li>
+<li>küldhet bátorítást vagy strukturált visszajelzést;</li>
+<li>nem módosíthat pontszámot és az MVP-ben nem oszthat saját kihívást.</li>
+</ul>
+<h2>4.3 Csapat</h2>
+<p>A csapat 3–4 fővel indul. Minden tag látja a közös erőforrásokat, a közös döntéseket, a csapattagok hozzájárulását és az egyéni kudarc miatt keletkező közös levonás forrását. A privát kihívás tartalmát, bizonyítékát és indoklását nem látja.</p>
+<h2>4.4 Heti csapatfelelős vagy parancsnok</h2>
+<p>A program eseményenként kijelölhet vagy rotálhat vezetőt. A heti csapatfelelős rögzíti a közös csata eredményét, amelyet minden jelenlévő játékos külön megerősít. Egyes csatahelyzetekben a kijelölt vezető időre dönt, kérhet tanácsot, vagy a forgatókönyv szerint tanács nélkül kell döntenie.</p>
+<h2>4.5 Központi segítő</h2>
+<p>A központi segítő az operatív kivételeket kezeli. Látja a csapatok haladását, aktivitását, erőforrásállapotát, a függő verifikációkat, a szünetkérelmeket és a jelentés-jóváhagyási sort. Nem böngészheti szabadon a nyers interjúkat és privát bizonyítékokat. A jelentés felülvizsgálatakor csak a felhasznált állításokhoz szükséges forrásrészletekhez fér hozzá. Minden érzékeny adatmegtekintés naplózódik.</p>
+<h2>4.6 Programadminisztrátor</h2>
+<p>Az adminisztrátor kohorszokat, szerepköröket, csomagverziókat és alapbeállításokat kezel. A technikai admin tölti fel a validált programcsomagot. Az MVP-ben nem szerkeszt tartalmat vizuális felületen.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Információ</th>
+<th align="center">Játékos</th>
+<th align="center">Saját verifikátor</th>
+<th align="center">Csapattárs</th>
+<th align="center">Központi segítő</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Saját kihívás tartalma</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+<td align="center">privát esetben nem</td>
+<td align="center">alapból nem</td>
+</tr>
+<tr>
+<td>Saját bizonyíték</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+<td align="center">nem</td>
+<td align="center">csak jelentésforrásként</td>
+</tr>
+<tr>
+<td>Ideiglenes egyéni profil</td>
+<td align="center">nem</td>
+<td align="center">igen</td>
+<td align="center">nem</td>
+<td align="center">nem</td>
+</tr>
+<tr>
+<td>Egyéni erőforrás-vesztés neve és összege</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+</tr>
+<tr>
+<td>Nyers interjúválasz</td>
+<td align="center">saját válasz</td>
+<td align="center">saját válasz</td>
+<td align="center">nem</td>
+<td align="center">nem</td>
+</tr>
+<tr>
+<td>Végső egyéni jelentés</td>
+<td align="center">igen</td>
+<td align="center">igen</td>
+<td align="center">nem</td>
+<td align="center">jóváhagyáskor</td>
+</tr>
+<tr>
+<td>Csapatprofil a program alatt</td>
+<td align="center">nem</td>
+<td align="center">nem</td>
+<td align="center">nem</td>
+<td align="center">nem</td>
+</tr>
+<tr>
+<td>Végső csapatjelentés</td>
+<td align="center">igen</td>
+<td align="center">nem</td>
+<td align="center">igen</td>
+<td align="center">jóváhagyáskor</td>
+</tr>
+</tbody></table></div>
+<h1 id="5-belepes-es-indulasi-kapu">5. Belépés és indulási kapu</h1>
+<h2>5.1 Fiók és meghívás</h2>
+<p>Az MVP jelszó nélküli e-mailes magic linket és Google OpenID Connect belépést támogat közös hitelesítési rétegen. A játékos létrehoz egy csapatot vagy meghívóval csatlakozik, majd meghívja a saját verifikátorát. A rendszer ellenőrzi a szerepkör-ütközést.</p>
+<h2>5.2 Beleegyezés és alkalmassági szűrők</h2>
+<p>A játékos kifejezetten elfogadja, hogy keresztény tartalmú programba lép, verifikátora hozzáfér a neki szánt adatokhoz, és a csapat látni fog bizonyos játékbeli következményeket. A rendszer nem diagnózisokat kér, hanem kiosztást befolyásoló alkalmassági kapcsolókat:</p>
+<ul>
+<li>nagy fizikai terhelés vállalható-e;</li>
+<li>böjt vagy étkezést érintő gyakorlat vállalható-e;</li>
+<li>nyilvános közösségimédia-megjelenés vállalható-e;</li>
+<li>házastársat vagy gyermeket bevonó feladat vállalható-e;</li>
+<li>utazást, pénzköltést vagy speciális eszközt igénylő feladat vállalható-e;</li>
+<li>van-e egyéb személyes határ.</li>
+</ul>
+<p>Ezek az adatok nem módosítják a jellemértékelést, és a csapat vagy a verifikátor nem látja őket. Házastársat érdemben érintő, beleegyezésköteles feladatnál az MVP-ben a játékos nyilatkozik arról, hogy előzetes beleegyezést kapott. A közvetlen harmadik fél általi jóváhagyás későbbi tervezési dilemma.</p>
+<h2>5.3 Csapatszövetség</h2>
+<p>Indulás előtt minden tag elfogad egy rövid közös működési szövetséget:</p>
+<ul>
+<li>a privát feladat részleteit nem követelik egymástól;</li>
+<li>egyenes kritika adható, sértegetés és megszégyenítés nem elfogadott;</li>
+<li>kudarc esetén először támogatást és megoldást keresnek;</li>
+<li>súlyos konfliktusnál segítséget kérhetnek;</li>
+<li>a konfliktusban mutatott működés része lehet a csapatértékelésnek.</li>
+</ul>
+<h2>5.4 A teljes indulási kapu</h2>
+<p>A csapat csak akkor indulhat, ha:</p>
+<ol>
+<li>minden játékos belépett és elfogadta a program feltételeit;</li>
+<li>a csapat 3–4 főből áll;</li>
+<li>minden játékosnak van csapaton kívüli verifikátora;</li>
+<li>minden játékos és verifikátor kitöltötte a belépő interjút;</li>
+<li>minden játékos beállította az alkalmassági szűrőket;</li>
+<li>mindenki elfogadta a csapatszövetséget;</li>
+<li>a csapat kiválasztotta a heti közös alkalom idősávját.</li>
+</ol>
+<p>Az MVP-ben a központi segítő nem írhatja felül ezt a kaput hiányzó verifikátor vagy interjú esetén.</p>
+<h1 id="6-a-jellemrajz-es-az-ertekelesi-modell">6. A jellemrajz és az értékelési modell</h1>
+<h2>6.1 Négy nézőpont</h2>
+<p>Jellemvonásonként négy, egymástól megkülönböztetett eredmény készül:</p>
+<ol>
+<li>a játékos önértékelése;</li>
+<li>a verifikátor külső értékelése;</li>
+<li>a hét hét kihívásaiból származó viselkedési eredmény;</li>
+<li>ezek konfigurált összesítése.</li>
+</ol>
+<p>A pókhálódiagramon a négy görbe külön megjeleníthető. Az eltérés nem hiba: az önkép, a külső kép és a megfigyelt viselkedés közötti különbség önálló felismerés.</p>
+<figure><img src="assets/ertekelesi-modell.png" alt="A lezárt kiinduló profil és a záró értékelés folyamata" loading="lazy"><figcaption>A lezárt kiinduló profil és a záró értékelés folyamata</figcaption></figure>
+<h2>6.2 Lepecsételt kiinduló kép</h2>
+<p>A belépő interjú eredménye elkészül, de a játékos számára lepecsételt állapotban marad. A rendszer használja a kiosztáshoz, a játékos azonban nem látja sem a pontszámot, sem a jellemvonásneveket, sem azt, melyik kihívás melyik tulajdonságot érinti.</p>
+<p>A verifikátor külön edzői felületen látja az ideiglenes jellemvonás-trendeket. Ez nem a végleges, megfogalmazott jellemrajz, hanem operatív támpont a bátorításhoz és az ellenőrzéshez.</p>
+<h2>6.3 Viselkedési bizonyíték</h2>
+<p>Minden kihívás egy elsődleges és szükség szerint több másodlagos jellemvonáshoz adhat súlyozott bizonyítékot. A későbbi értékelésben számíthat:</p>
+<ul>
+<li>a feladat nehézsége;</li>
+<li>a teljesítés, részleges teljesítés vagy kudarc;</li>
+<li>a verifikáció erőssége;</li>
+<li>az ismétlődés és időbeli következetesség;</li>
+<li>a körülmény és az alkalmasság;</li>
+<li>a csapathelyzetben mutatott viselkedés;</li>
+<li>a bizonyíték mennyisége és változatossága.</li>
+</ul>
+<p>Egyetlen látványos siker vagy kudarc nem mozdíthatja el aránytalanul a profilt. A rendszer minden tengely mellett jelzi a bizonyíték mennyiségét és az értelmezés bizonytalanságát. A pontos képlet a jellemvonásrendszer részeként kidolgozandó.</p>
+<h2>6.4 Adaptív, de nem reduktív kiosztás</h2>
+<p>A motor nem kizárólag a legalacsonyabb pontokra céloz. A kiosztás kiegyensúlyozza:</p>
+<ul>
+<li>a fejlesztendő területeket;</li>
+<li>a játékos által választott általános fókuszt;</li>
+<li>a meglévő erősségek használatát;</li>
+<li>a csapat aktuális szükségletét;</li>
+<li>a korábbi kihívások eredményét;</li>
+<li>a változatosságot és az ismétlések kerülését.</li>
+</ul>
+<h2>6.5 Csapatjellemrajz</h2>
+<p>A csapat külön, rejtett fejlődési profilt kap. A csapatdinamikai tengelyek a közös kihívásokból, a döntésekből, a veszteségekre adott reakciókból, a teherviselésből és a rövid heti reflexiókból épülnek. A játékosok a program alatt csak a játékbeli erőforrásokat látják; a csapatdiagram és a szöveges értékelés a végén nyílik meg.</p>
+<h1 id="7-a-hethetes-hadjarat">7. A héthetes hadjárat</h1>
+<h2>7.1 Heti ritmus</h2>
+<p>Minden hét hét napból áll:</p>
+<ul>
+<li>öt építkező és elővédharc-nap, főleg egyéni kihívásokkal;</li>
+<li>egy személyes közös alkalom és csata;</li>
+<li>egy kötelező sabbat vagy pihenőnap.</li>
+</ul>
+<p>A hét kezdőnapját, a csata napját, a pihenőnapot és az időzónát a kohorsz konfigurációja adja. Az első keresztény csomag ajánlhat vasárnaptól szombatig tartó ritmust, de a motor ezt nem égeti be.</p>
+<figure><img src="assets/heti-ciklus.png" alt="Az öt építkező nap, a csata és a sabbat heti ciklusa" loading="lazy"><figcaption>Az öt építkező nap, a csata és a sabbat heti ciklusa</figcaption></figure>
+<h2>7.2 A sabbat szerepe</h2>
+<p>A hetedik nap nem maradék idő és nem felzárkózási nap. Önálló tanítás: a játékos tudatosan félreteszi a teljesítménykényszert, és figyelmet ad Istennek, a családjának, a kapcsolatainak és a pihenésnek. A programcsomag rövid igei keretet és sabbatvállalást adhat.</p>
+<p>A sabbat kötelező és verifikált, de nem pontozott. Nincs jutalom vagy büntetés, és a rendszer nem minősíti a hit vagy a pihenés „minőségét”. A verifikátor megfigyelhető kérdésekre válaszolhat: megtartotta-e a játékos a vállalt határt, jelen volt-e a családjával, képes volt-e félretenni a szokásos munkát.</p>
+<h2>7.3 Kampányív</h2>
+<p>Az első hat hét kisebb összecsapásokkal építi a sereget. A hetedik hét közös alkalma a döntő künoszkephalai csata. A korábbi eredmények, erőforrások és csapatdöntések mind hatnak a végkimenetelre.</p>
+<p>A heti csaták között lehet előre megírt, megnyerhetetlen helyzet. A játékosok ezt csak az utólagos feldolgozásban tudják meg. Az eleve elvesztésre tervezett csata nem rontja automatikusan a jellemértékelést; a rendszer azt figyeli, hogyan dolgozott és hogyan reagált a csapat. A teljes hadjárat is elveszíthető. Vereség, költséges győzelem és döntő győzelem egyaránt lehetséges, de minden befejező résztvevő megkapja a jóváhagyott záró jelentését.</p>
+<h2>7.4 Kohorszritmus</h2>
+<p>Az 5–10 csapat együtt indul és ugyanabban a heti fejezetben jár. Az egyéni és csapatkihívások személyre szabottak lehetnek, a heti történeti téma közös. Az MVP-ben a csapatok nem látják egymás eredményét.</p>
+<h1 id="8-a-kihivasrendszer">8. A kihívásrendszer</h1>
+<h2>8.1 A kihívás értelmezési tartománya</h2>
+<p>A kihívás nem egységes időtartamú teendő. Lehet:</p>
+<ul>
+<li>egyszeri cselekedet;</li>
+<li>adott napra szóló szerepvállalás;</li>
+<li>mennyiségi vagy időtartam-cél;</li>
+<li>egész napos gyakorlat;</li>
+<li>egész hetes szabály;</li>
+<li>kapcsolati esemény;</li>
+<li>nyilvános vállalás;</li>
+<li>többnapos előkészítés, amely a csatában zárul;</li>
+<li>egyéni, verifikátori vagy csapatfeladat.</li>
+</ul>
+<p>Illusztratív példák lehetnek egy régi barát felhívása, egy hitről vagy háláról szóló nyilvános bejegyzés, egy böjti nap, egy fizikai mennyiségi cél, egy házastárssal szervezett közös program vagy egy egész hétre szóló hétköznapi korlátozás. Ezek nem a végleges kihíváskönyvtár elemei, és csak a biztonsági és beleegyezési szabályok teljesülésekor használhatók.</p>
+<h2>8.2 Kötelező metaadatok</h2>
+<p>Minden kihívás legalább az alábbi címkéket és szabályokat kapja:</p>
+<ul>
+<li>elsődleges és másodlagos jellemvonás;</li>
+<li>csapatdinamikai hatás;</li>
+<li>célcsoport és előfeltételek;</li>
+<li>időtartam, gyakoriság, kezdés és határidő;</li>
+<li>egyéni, páros vagy csapatszint;</li>
+<li>fizikai intenzitás;</li>
+<li>nyilvánossági és kapcsolati érzékenység;</li>
+<li>harmadik fél beleegyezésének szükségessége;</li>
+<li>eszköz-, helyszín-, idő- vagy költségigény;</li>
+<li>teljesítési mező és verifikációs feltétel;</li>
+<li>nehézség és súly;</li>
+<li>játékbeli jutalom és kudarc-következmény;</li>
+<li>heti csatához vagy történeti ponthoz való kapcsolat;</li>
+<li>kompatibilis alternatívák.</li>
+</ul>
+<h2>8.3 Kurált könyvtár</h2>
+<p>Az MVP kizárólag előre megírt és jóváhagyott kihívásokból választ. Az AI nem találhat ki valós időben új fizikai, kapcsolati, nyilvános vagy lelki gyakorlatot. A feladat előre engedélyezett tartományban paraméterezhető, de a jelentésíró AI nem léphet át a könyvtár szabályain.</p>
+<h2>8.4 Kiosztási folyamat</h2>
+<ol>
+<li>A motor kiszűri az alkalmassági és biztonsági okból tiltott elemeket.</li>
+<li>Kizárja a nem megfelelő időzítésű, előfeltételű vagy ismétlődő feladatokat.</li>
+<li>Pontozza a jelölteket a rejtett profil, a korábbi eredmények, a csapatigény és a heti történet alapján.</li>
+<li>A legjobb jelöltek közül kontrollált véletlennel választ.</li>
+<li>Alapesetben egy konkrét feladatot oszt ki; a programcsomag egyes helyzetekben 2–3 egyenértékű opciót engedhet.</li>
+<li>A kiosztás oka naplózódik, de a játékos számára a jellemvonáscímke rejtett marad.</li>
+</ol>
+<h2>8.5 Kihíváscsere</h2>
+<p>Normál csere két módon lehetséges:</p>
+<ul>
+<li>a verifikátor jóváhagyja;</li>
+<li>a játékos személyes többletpontot vált be.</li>
+</ul>
+<p>Egészségi kockázat, lelkiismereti probléma, hiányzó harmadik fél beleegyezése vagy más súlyos személyes határ esetén a játékos azonnal, büntetés nélkül visszautasíthatja a feladatot. Alkalmatlanság esetén a rendszer megfelelő alternatívát keres. Ezek a kivételek nem szolgálhatnak a jellemértékelés negatív bizonyítékául.</p>
+<h2>8.6 Beküldés és bizonyíték</h2>
+<p>Az MVP a következő bizonyítékformákat tárolja:</p>
+<ul>
+<li>teljesítve jelölés;</li>
+<li>számérték, időtartam vagy ismétlésszám;</li>
+<li>rövid szöveges reflexió;</li>
+<li>opcionális URL;</li>
+<li>verifikátori döntés és megjegyzés.</li>
+</ul>
+<p>Fénykép-, videó- és hangfeltöltés nincs az MVP-ben. A nyers bizonyíték a jelentés jóváhagyását követő megőrzési idő végén törlődik.</p>
+<h2>8.7 Verifikáció</h2>
+<p>A beküldés után a verifikátor választ: teljesítve, részben teljesítve, nem igazolható vagy nem teljesítve. Az MVP-ben döntése végleges, nincs fellebbezés. A jutalom addig csak függőben jelenik meg, és nem használható fel a csatában.</p>
+<p>Ha a verifikátor késik, a játékos nem kap büntetést, de a függő jutalom nem válik költhetővé. A verifikátor emlékeztetőt kap, ismétlődő késésnél a központi segítő értesül. Tartós inaktivitás esetén új verifikátor választható. Korábbi függő feladatot csak akkor bírálhat el, ha a megőrzött bizonyíték alapján ténylegesen megítélhető; különben az ügy jutalom és büntetés nélkül zárul.</p>
+<h2>8.8 Határidő</h2>
+<p>Az MVP egyszerű szabályt használ: határidő után a kihívás sikertelen, és életbe lép a megadott következmény. Nincs utólagos bepipálás vagy pótfeladat. Helyreállító kihívás és részleges erőforrás-visszaszerzés későbbi irány.</p>
+<h1 id="9-jatekmechanika-es-taktika">9. Játékmechanika és taktika</h1>
+<h2>9.1 Rejtett érték és látható valuta</h2>
+<p>A jellempontszám nem játékvaluta. Nem költhető, nem adható át, és a játékos a program alatt nem látja. Ettől különül el:</p>
+<ul>
+<li>a személyes érdempont, amely kihíváscserére vagy később kisebb taktikai előnyre költhető;</li>
+<li>többféle közös hadjárati erőforrás, amelyek a csata lehetőségeit alakítják.</li>
+</ul>
+<p>Az első kampány lehetséges közös erőforrás-kategóriái a morál, készlet, felderítés és harckészség vagy kohézió. A pontos nevek, korlátok és hatások a programcsomagban állnak.</p>
+<h2>9.2 Kudarc és közös következmény</h2>
+<p>Sikertelen egyéni kihívásnál először a játékos személyes erőforrása csökken. Ha az nem elegendő, a fennmaradó levonás a csapat közös készletét terheli. A csapat látja az érintett játékos nevét és a levonás összegét, de a privát feladat részleteit nem.</p>
+<p>A rendszer nem szégyeníti meg a játékost, de nem rejti el a közös következményt. A csapat reakciója új helyzetet nyit, amely strukturált reflexióval a csapatprofil részévé válhat.</p>
+<h2>9.3 Taktikai erőforrás-költés</h2>
+<p>A csapat a csata előtt dönthet arról, mit használ fel azonnal, mit tartalékol, és melyik gyengeséget ellensúlyozza. A döntési mód forgatókönyvenként lehet:</p>
+<ul>
+<li>többségi szavazás;</li>
+<li>egyhangú döntés;</li>
+<li>kijelölt vezető döntése;</li>
+<li>időzített vezetői döntés;</li>
+<li>tanácskérés engedélyezve vagy tiltva;</li>
+<li>csapatjavaslat után vezetői végső döntés;</li>
+<li>határidő utáni automatikus következmény.</li>
+</ul>
+<p>Háromfős csapatnál két, négyfős csapatnál három azonos szavazat ad többséget. Döntetlennél vagy időtúllépésnél az eseményben kijelölt parancsnok dönthet. A döntési folyamat maga is viselkedési adat.</p>
+<h2>9.4 Csapatcsata</h2>
+<p>A heti csata elsősorban személyes alkalom. Egy kijelölt készülék mutatja a közös állapotot, minden játékos a saját telefonján szavaz és erősíti meg részvételét. A heti csapatfelelős rögzíti a közös eredményt, amely akkor végleges, amikor minden jelenlévő tag megerősítette. A csapat részleges sikert is elérhet, miközben az egyéni részvétel külön megmarad.</p>
+<p>Az MVP nem tartalmaz videóhívást vagy csapatchatet. A szabad kommunikáció személyesen vagy a csapat meglévő külső csatornáján történik.</p>
+<h1 id="10-verifikator-mint-fejlodesi-szovetseges">10. Verifikátor mint fejlődési szövetséges</h1>
+<h2>10.1 Alapszerep</h2>
+<p>A verifikátor nem semleges mérőműszer, hanem a játékost jól ismerő külső megfigyelő. Az MVP-ben értékel, igazol és strukturáltan bátorít. Folyamatos trendnézete miatt észreveheti, hol van szükség nagyobb figyelemre, de nem módosíthatja közvetlenül a motort vagy a pontszámot.</p>
+<h2>10.2 Opcionális páros fejlesztési modul</h2>
+<p>Későbbi, külön bekapcsolható modulban a verifikátor maga is kaphat feladatokat, például közös beszélgetést, támogatási gesztust vagy a játékossal együtt végzett gyakorlatot. Ez különösen értékes lehet házastársi kapcsolatban, de nem lehet az alapverifikáció feltétele.</p>
+<p>A modul előtt külön ki kell dolgozni:</p>
+<ul>
+<li>a kétoldalú beleegyezést;</li>
+<li>a meglepetésfeladatok határát;</li>
+<li>a visszautasítás módját;</li>
+<li>a kapcsolati biztonságot;</li>
+<li>azt, hogy a páros feladat torzítja-e a verifikátori ítéletet.</li>
+</ul>
+<h2>10.3 Későbbi edzői beavatkozások</h2>
+<p>Nem MVP-funkció, hogy a verifikátor kérhesse egy jellemvonás erősebb figyelembevételét, nehézségemelést vagy más feladatformát. Ezek csak stabil értékelési modell és pilotadatok után kerülhetnek be.</p>
+<h1 id="11-szunet-kieses-es-kilepes">11. Szünet, kiesés és kilépés</h1>
+<h2>11.1 Egyéni szünet</h2>
+<p>Az egyéni szünethez a csapattöbbség és a központi segítő jóváhagyása kell. Jóváhagyás után nincs új kihívás vagy büntetés, az elvárások az aktív létszámhoz igazodnak, az addigi eredmények megmaradnak.</p>
+<h2>11.2 Csapatszünet</h2>
+<p>Teljes csapatszünethez minden játékos és a központi segítő jóváhagyása kell. A kampánynaptár megáll, majd ugyanonnan folytatódik. A jóváhagyási idő alatt visszamenőleges büntetés nem keletkezik.</p>
+<h2>11.3 Végleges kilépés</h2>
+<p>Játékos vagy verifikátor bármikor végleg kiléphet, ehhez nem kell csapatengedély. A kilépés nem okoz új levonást. A játékos személyes adatainak törlését kérheti, és befejezetlen programból nem készül teljes jellemrajz.</p>
+<p>A csapat 3–4 fővel indul, két aktív játékossal még átskálázva befejezheti a kampányt. Egyetlen játékosnál a csapatkampány lezárul. Új tag csak az első hét végéig csatlakozhat.</p>
+<h1 id="12-zaras-es-utravalo">12. Zárás és útravaló</h1>
+<h2>12.1 Zárási kapu</h2>
+<p>A végső csata után:</p>
+<ol>
+<li>a játékos kitölti a záró önértékelést;</li>
+<li>a verifikátor ettől függetlenül kitölti a záró értékelést;</li>
+<li>a csapattagok kitöltik a rövid záró csapatértékelést;</li>
+<li>a rendszer elkészíti az egyéni és csapatjelentés tervezetét;</li>
+<li>a központi segítő megvizsgálja a szöveget és a forrásnyomokat;</li>
+<li>jóváhagyás után egyszerre nyílnak meg a diagramok és a jelentések.</li>
+</ol>
+<p>Az MVP nem ad ki hiányzó verifikátori vagy csapatértékeléssel készült teljes profilt.</p>
+<h2>12.2 Az egyéni jelentés tartalma</h2>
+<p>A cél 3–5 oldalas, konkrét és használható útravaló. Javasolt szerkezete:</p>
+<ol>
+<li>honnan indult a játékos az önértékelés és a verifikátor szerint;</li>
+<li>hogyan alakult a hét jellemvonás a viselkedési adatok alapján;</li>
+<li>hol egyezett és hol tért el az önkép, a külső kép és a megfigyelt működés;</li>
+<li>mely kihívások szolgáltatnak erős példát;</li>
+<li>milyen csapathelyzetekben mutatott erőt vagy elakadást;</li>
+<li>min dolgozott sokat, és hol maradt kevés bizonyíték;</li>
+<li>következő lépések, konkrét gyakorlatok és biblikus útravaló.</li>
+</ol>
+<p>A jelentés fogalmazhat például úgy, hogy egy adott kihívásban a játékos nem tudta meghaladni a korábbi mintáját, de ezt csak rögzített eseményre hivatkozva teheti. Nem állíthat motivációt, belső okot vagy végleges jellemtulajdonságot pusztán egy eredményből.</p>
+<h2>12.3 Konfigurálható jellemzéssablon</h2>
+<p>A programcsomag állítja be:</p>
+<ul>
+<li>a fejezetszerkezetet és terjedelmet;</li>
+<li>a hangnemet és megszólítást;</li>
+<li>a pontszámok értelmezését;</li>
+<li>a kötelező és tiltott állítástípusokat;</li>
+<li>a bibliai hivatkozások szabályait;</li>
+<li>a tanácskategóriákat;</li>
+<li>a játékos és verifikátor számára látható részeket;</li>
+<li>a konkrét események idézésének módját.</li>
+</ul>
+<h2>12.4 AI és emberi jóváhagyás</h2>
+<p>A pontszámokat és eseményeket determinisztikus rendszer számolja. A szöveggeneráló komponens csak rögzített adatokból dolgozhat, minden konkrét állításhoz forrásnyomot kell adnia, és nem diagnosztizálhat. A központi segítő szerkesztheti vagy eltávolíthatja a megfogalmazást, de a rögzített eredményt nem írhatja át észrevétlenül.</p>
+<p>Az egyéni és csapatjelentés a PWA-ban olvasható és PDF-ként letölthető.</p>
+<h1 id="13-kozponti-mukodtetes">13. Központi működtetés</h1>
+<h2>13.1 Segítői munkafelület az MVP-ben</h2>
+<p>Az operatív felület mutatja:</p>
+<ul>
+<li>kohorszok és csapatok állapotát;</li>
+<li>indulási kapuk hiányait;</li>
+<li>heti előrehaladást;</li>
+<li>aktív, szünetelő és kilépett résztvevőket;</li>
+<li>függő és késő verifikációkat;</li>
+<li>csataidőpontokat és elmaradásokat;</li>
+<li>szünetkérelmeket;</li>
+<li>segítségkéréseket;</li>
+<li>jelentéstervezeteket és jóváhagyási sort;</li>
+<li>auditált érzékeny adatmegtekintést.</li>
+</ul>
+<p>Részletes hatásanalitika és program-dashboard nem MVP-funkció. Az eseménymodell azonban már az első verziótól elemzésre alkalmas, hogy később részvételi, működési és minőségi mutatók készülhessenek.</p>
+<h2>13.2 Értesítések</h2>
+<p>Az MVP e-mailt és opcionális PWA push értesítést használ:</p>
+<ul>
+<li>meghívás és belépés;</li>
+<li>új kihívás;</li>
+<li>verifikációs kérés;</li>
+<li>nyitott szavazás vagy vezetői döntés;</li>
+<li>közelgő csata;</li>
+<li>veszélybe kerülő határidő;</li>
+<li>záró interjú és jelentés elkészülte.</li>
+</ul>
+<p>A felhasználó csendes időszakot állíthat be. SMS és külső üzenetküldő-integráció későbbi irány.</p>
+<h1 id="14-adatvedelem-bizalom-es-biztonsag">14. Adatvédelem, bizalom és biztonság</h1>
+<h2>14.1 Adatminimalizálás</h2>
+<p>A rendszer csak a program működéséhez szükséges adatot gyűjti. Az alkalmassági szűrő nem kér diagnózist. Médiafájl nem kerül a rendszerbe. A csapat nem lát privát bizonyítékot. A központi segítő hozzáférése célhoz kötött és naplózott.</p>
+<h2>14.2 Megőrzés és törlés</h2>
+<ul>
+<li>A nyers interjúválaszok és bizonyítékok a program végéig, a jelentés jóváhagyásáig és az azt követő alapértelmezett 30 napos ellenőrzési időig maradnak meg.</li>
+<li>A végső jelentés letölthető, az alkalmazásban korlátozott ideig érhető el.</li>
+<li>A játékos bármikor kérheti fiókja és személyes adatai törlését.</li>
+<li>Anonimizált programstatisztika csak külön hozzájárulással őrizhető meg.</li>
+<li>A megőrzési idők telepítési beállítások, nem a vallási programcsomag részei.</li>
+</ul>
+<h2>14.3 Biztonsági határ</h2>
+<p>Fizikai, böjti, nyilvános vagy kapcsolati kihívás csak megfelelő címkével, előfeltétellel, beleegyezési szabállyal és alternatívával kerülhet a könyvtárba. A biztonsági vagy lelkiismereti visszautasítás nem igényel verifikátori engedélyt és nem büntethető.</p>
+<h2>14.4 Jogi és szakmai ellenőrzés</h2>
+<p>A részletes adatkezelési tájékoztató, hozzájárulási szöveg, gyermekeket érintő feladatok szabálya, egészségügyi kizárások és az AI-jellemzés jogi kerete külön szakmai ellenőrzést igényel az éles pilot előtt. Ez nem helyettesíti a két tartalmi munkacsomagot, hanem implementáció előtti megfelelési kapu.</p>
+<h1 id="15-mvp-platform-es-technikai-irany">15. MVP-platform és technikai irány</h1>
+<h2>15.1 PWA</h2>
+<p>Az MVP telefonra optimalizált, alkalmazásbolt nélkül használható PWA központi háttérrendszerrel. Böngészőből is teljes értékű, kezdőképernyőre telepíthető. Online-first: új kihíváshoz, beküldéshez, verifikációhoz és csapatdöntéshez internet kell. Teljes offline eseménysor és későbbi szinkron nincs az MVP-ben.</p>
+<h2>15.2 Felületi hangnem</h2>
+<p>A napi játék, térkép, tábor és csata retro-arcade római hadjárati stílust kap. Az interjúk, adatvédelmi felületek és jelentések visszafogott, komoly és nyomtatható vizuális rendszert használnak. Az alapvető hozzáférhetőség – olvasható kontraszt, szemantikus vezérlők, billentyűzetes kezelés és csökkentett mozgás tisztelete – már az MVP minőségi követelménye.</p>
+<h2>15.3 Lokalizáció</h2>
+<p>Az alkalmazás minden felületi és programtartalmi szöveget i18n-rétegen keresztül kap. Az első kiadás csak magyar nyelvű. További nyelvek fordítási és tartalom-ellenőrzési munkát igényelnek, de nem követelnek motormódosítást.</p>
+<h2>15.4 Technikai komponensek nagyvonalakban</h2>
+<ul>
+<li>reszponzív PWA kliens;</li>
+<li>központi API és perzisztencia;</li>
+<li>szerepkör- és jogosultságkezelés;</li>
+<li>programcsomag-betöltő és séma-validátor;</li>
+<li>interjú- és értékelési szolgáltatás;</li>
+<li>kihíváskiosztó és eseménymotor;</li>
+<li>verifikációs workflow;</li>
+<li>csapat- és csatamotor;</li>
+<li>értesítési szolgáltatás;</li>
+<li>jelentés-előkészítő, AI-szövegező és emberi jóváhagyási folyamat;</li>
+<li>audit- és adatmegőrzési szolgáltatás.</li>
+</ul>
+<p>Konkrét technológiai stack, felhőszolgáltató, adatbázis és AI-modell kiválasztása a későbbi scoping része.</p>
+<h1 id="16-az-mvp-hatara">16. Az MVP határa</h1>
+<h2>16.1 Benne van</h2>
+<ul>
+<li>kohorsz- és csapatlétrehozás;</li>
+<li>3–4 fős önként szerveződő csapatok;</li>
+<li>játékos, verifikátor, központi segítő és admin szerepkör;</li>
+<li>magic link és Google-belépés;</li>
+<li>teljes indulási és zárási kapu;</li>
+<li>konfigurált hét jellemvonás és csapatprofil;</li>
+<li>rejtett belépő profil és verifikátori trendnézet;</li>
+<li>kurált, címkézett kihíváskönyvtár;</li>
+<li>személyre szabott kiosztás kontrollált véletlennel;</li>
+<li>verifikátori végleges döntés;</li>
+<li>pontért vagy verifikátori jóváhagyással történő csere;</li>
+<li>több közös erőforrás és taktikai döntés;</li>
+<li>hét heti fejezet, csaták és végső vereség lehetősége;</li>
+<li>sabbat verifikáció pontozás nélkül;</li>
+<li>egyéni és csapatszünet;</li>
+<li>központi operatív felület és jelentésjóváhagyás;</li>
+<li>magyar PWA, e-mail és opcionális push;</li>
+<li>egyéni és csapatjelentés, PDF-export;</li>
+<li>adatmegőrzés, törlés és auditnapló.</li>
+</ul>
+<h2>16.2 Nincs benne</h2>
+<ul>
+<li>valós idejű AI-kihívásgenerálás;</li>
+<li>vizuális programcsomag-szerkesztő;</li>
+<li>beépített csapatchat vagy videóhívás;</li>
+<li>teljes offline mód;</li>
+<li>algoritmikus csapattársítás;</li>
+<li>kohorszverseny vagy kohorsz-kooperáció;</li>
+<li>személyes pontok átadása vagy veszteség átvállalása;</li>
+<li>pótfeladat és utólagos teljesítés;</li>
+<li>verifikátori fellebbezés;</li>
+<li>verifikátor által kért trait-fókusz vagy nehézségmódosítás;</li>
+<li>aktív páros fejlesztési modul;</li>
+<li>harmadik fél közvetlen, alkalmazáson belüli hozzájárulása;</li>
+<li>részletes analitikai dashboard;</li>
+<li>SMS és külső üzenetküldő-integráció;</li>
+<li>többnyelvű tartalom.</li>
+</ul>
+<h1 id="17-definition-of-ready-a-scoping-korhoz">17. Definition of Ready a scoping körhöz</h1>
+<p>A koncepció működési értelemben scopingra kész, ha a jelen dokumentum döntéseit elfogadjuk, és a két piros munkacsomag elkészül. A későbbi technikai scoping bemenetei:</p>
+<ol>
+<li>jóváhagyott szerepkör- és láthatósági mátrix;</li>
+<li>jóváhagyott heti és teljes kampányfolyamat;</li>
+<li>jóváhagyott kihívás-életciklus és verifikáció;</li>
+<li>jóváhagyott erőforrás- és csatadöntési keret;</li>
+<li>jóváhagyott adatmegőrzési és emberi jelentéskapu;</li>
+<li>verziózott programcsomag-séma tervezete;</li>
+<li>elkészült jellemvonásrendszer és interjúcsomag;</li>
+<li>elkészült, biztonságilag átnézett kihívás- és forgatókönyvtár;</li>
+<li>jogi, adatvédelmi és tartalombiztonsági ellenőrzési terv;</li>
+<li>elfogadott MVP feature-lista és függőségi sorrend.</li>
+</ol>
+<h1 id="18-a-ket-kiadando-munkacsomag">18. A két kiadandó munkacsomag</h1>
+<h2>🟥 Munkacsomag 1 – Jellemvonásrendszer és mérési keret</h2>
+<p><strong>Cél:</strong> olyan teljes, biblikusan és szakirodalmilag indokolt első programmodell létrehozása, amely pontosan hét egyéni jellemvonást és a hozzájuk kapcsolódó csapatdinamikai tengelyeket tartalmazza.</p>
+<p><strong>Kötelező kimenet:</strong></p>
+<ul>
+<li>hét jellemvonás neve, egyértelmű definíciója és határa;</li>
+<li>annak indoklása, miért tekinthető a célcsoport számára alapvetőnek;</li>
+<li>bibliai és szakirodalmi forrásjegyzék;</li>
+<li>pozitív, túlhasznált és hiányos megjelenés leírása;</li>
+<li>megfigyelhető hétköznapi viselkedések;</li>
+<li>játékosi és verifikátori belépő és záró kérdéskészlet;</li>
+<li>a válaszskálák és a pontozás elve;</li>
+<li>önkép–külső kép eltérésének értelmezése;</li>
+<li>viselkedési bizonyíték súlyozásának kerete;</li>
+<li>bizonytalansági és minimális bizonyítékszabályok;</li>
+<li>csapatdinamikai tengelyek és mérési kérdések;</li>
+<li>a jelentéssablon számára használható értelmezési és tanácsadási keret;</li>
+<li>tiltott, túlzó vagy diagnosztikus állítások listája.</li>
+</ul>
+<p><strong>Elfogadási feltétel:</strong> a modell minden eleme megfigyelhető viselkedéshez kapcsolható, a játékosi és verifikátori kérdések nem puszta szó szerinti másolatok, az eredmény nem állít klinikai validitást, és a keret alkalmas a második munkacsomag címkézésére.</p>
+<h2>🟥 Munkacsomag 2 – Kihíváskönyvtár és héthetes forgatókönyv</h2>
+<p><strong>Függőség:</strong> csak az első munkacsomag stabil változata után véglegesíthető.</p>
+<p><strong>Cél:</strong> teljes, egy hét héten át futtatható, kellően változatos és biztonsági alternatívákat tartalmazó első kampánycsomag létrehozása.</p>
+<p><strong>Kötelező kimenet:</strong></p>
+<ul>
+<li>elegendő egyéni kihívás minden jellemvonáshoz, több nehézségi és formai változatban;</li>
+<li>többnapos és egész hetes kihívások;</li>
+<li>verifikátori értékelési kritériumok;</li>
+<li>opcionális, későbbi páros verifikátori feladatok elkülönített listája;</li>
+<li>csapatépítő és csapatdinamikát próbára tevő kihívások;</li>
+<li>hét heti történeti fejezet;</li>
+<li>hét csataforgatókönyv, köztük legalább egy tudatosan megnyerhetetlen csata;</li>
+<li>a döntő künoszkephalai csata több lehetséges végkimenetele;</li>
+<li>minden feladathoz teljes metaadat és játékbeli következmény;</li>
+<li>fizikai, böjti, nyilvános és kapcsolati feladatok biztonsági alternatívái;</li>
+<li>ismétlés- és kifogyásvizsgálat a legszigorúbb alkalmassági szűrők mellett;</li>
+<li>bibliai keret és igei kapcsolódás a csomag által választott szabályok szerint;</li>
+<li>jelentésben használható, tárgyilagos eseményértelmezési minták.</li>
+</ul>
+<p><strong>Elfogadási feltétel:</strong> egy 3–4 fős csapat teljes hét hetét végig lehet játszani úgy, hogy a játékosonkénti kizárások és cserék mellett sem fogy el a megfelelő kihívás, minden feladat egyértelműen verifikálható, és nincs jóváhagyatlan biztonsági vagy beleegyezési kockázat.</p>
+<h1 id="19-fo-kockazatok-es-dilemmak">19. Fő kockázatok és dilemmák</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Kockázat vagy dilemma</th>
+<th>Hatás</th>
+<th>Kezelés az MVP-ben</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gyenge vagy önkényes jellemvonásmodell</td>
+<td>hiteltelen jelentés</td>
+<td>piros munkacsomag, forrásolt szakmai kidolgozás</td>
+</tr>
+<tr>
+<td>Kevés vagy rosszul címkézett kihívás</td>
+<td>ismétlődés, hibás kiosztás</td>
+<td>teljes kampánykönyvtár és séma-validáció</td>
+</tr>
+<tr>
+<td>Verifikátori torzítás</td>
+<td>pontatlan külső kép</td>
+<td>külön nézőpontok, forrásjelölés, végleges ítélet visszafogott nyelve</td>
+</tr>
+<tr>
+<td>Verifikátor késik vagy eltűnik</td>
+<td>játékos elveszti a csataelőnyt</td>
+<td>emlékeztető, segítői jelzés, verifikátorcsere</td>
+</tr>
+<tr>
+<td>Csapat megszégyeníti a veszteséget okozó játékost</td>
+<td>kapcsolati kár</td>
+<td>kötelező csapatszövetség, segítségkérés, strukturált reflexió</td>
+</tr>
+<tr>
+<td>Egészségi vagy kapcsolati kockázat</td>
+<td>tényleges károkozás</td>
+<td>alkalmassági szűrés, azonnali biztonsági visszautasítás, alternatíva</td>
+</tr>
+<tr>
+<td>A megnyerhetetlen csata igazságtalannak hat</td>
+<td>bizalomvesztés</td>
+<td>utólagos feltárás, erőfeszítés külön értékelése</td>
+</tr>
+<tr>
+<td>A játékos rájátszik a kívánt profilra</td>
+<td>torz eredmény</td>
+<td>rejtett jellemvonáscímkék és diagramok</td>
+</tr>
+<tr>
+<td>AI túlzó jellemítéletet ír</td>
+<td>lelki vagy reputációs kár</td>
+<td>forráskényszer, tiltott állítások, emberi jóváhagyás</td>
+</tr>
+<tr>
+<td>Házastársi beleegyezés csak önnyilatkozat</td>
+<td>vitatható hozzájárulás</td>
+<td>MVP-ben egyszerűsített nyilatkozat, később közvetlen jóváhagyás vizsgálata</td>
+</tr>
+<tr>
+<td>Túl nagy adminterhelés</td>
+<td>a kohorsz nem skálázódik</td>
+<td>kivételalapú felület, későbbi analitika és automatizálás</td>
+</tr>
+<tr>
+<td>Érzékeny adatok túl hosszú megőrzése</td>
+<td>adatvédelmi és bizalmi kockázat</td>
+<td>automatikus törlés, célhoz kötött hozzáférés, audit</td>
+</tr>
+</tbody></table></div>
+<h1 id="20-kovetkezo-lepesek">20. Következő lépések</h1>
+<ol>
+<li>A jelen munkakoncepció közös felülvizsgálata.</li>
+<li>A két piros munkacsomag felelőseinek kijelölése.</li>
+<li>A jellemvonásrendszer elkészítése és döntési review-ja.</li>
+<li>A programcsomag-séma első vázlata a jellemvonásmodell alapján.</li>
+<li>A kihívás- és forgatókönyvtár elkészítése.</li>
+<li>Jogi, adatvédelmi és tartalombiztonsági áttekintés.</li>
+<li>Technikai scoping: komponensek, adatmodell, integrációk, költség és ütemezés.</li>
+<li>Kattintható PWA-prototípus a játékosi, verifikátori és segítői főfolyamatokra.</li>
+<li>Belső teszt egyetlen csapattal.</li>
+<li>Feltáró pilot 5–10 önként szerveződő csapattal.</li>
+</ol>
+<h1 id="21-fogalomtar">21. Fogalomtár</h1>
+<p><strong>Jellemrajz:</strong> a játékosi önértékelés, a verifikátori kép és a programban megfigyelt viselkedés elkülönített, majd összesített értelmezése.</p>
+<p><strong>Verifikátor:</strong> a játékos által választott, csapaton kívüli közeli ismerős, aki külső értékelést ad és véglegesen ellenőrzi az egyéni kihívások teljesítését.</p>
+<p><strong>Programcsomag:</strong> verziózott konfiguráció, amely a jellemvonásokat, interjúkat, kihívásokat, értékelést, történetet, jelentéssablont és lokalizált tartalmat adja a semleges motorhoz.</p>
+<p><strong>Kihívás:</strong> időtartamtól és formától független, előre definiált viselkedési egység, teljesítési, verifikációs, biztonsági és játékbeli szabályokkal.</p>
+<p><strong>Viselkedési bizonyíték:</strong> egy kihívás vagy csapathelyzet ellenőrzött eredménye, amely súlyozottan informálhat egy vagy több jellemvonást.</p>
+<p><strong>Személyes érdempont:</strong> látható és költhető játékvaluta, amely nem azonos a rejtett jellempontszámmal.</p>
+<p><strong>Közös erőforrás:</strong> a csapat által felépített és taktikailag felhasználható játékbeli készlet vagy állapot.</p>
+<p><strong>Csata:</strong> a heti közös alkalom strukturált, döntéseket és közös kihívásokat tartalmazó játékszakasza.</p>
+<p><strong>Sabbat:</strong> kötelező, verifikált, de nem pontozott pihenőnap, amelyen nincs fejlődési vagy pótfeladat.</p>
+<p><strong>Lepecsételt profil:</strong> elkészült, de a játékos számára a program végéig nem látható ideiglenes jellemértékelés.</p>
+<p><strong>Központi segítő:</strong> kivétel- és jóváhagyáskezelő szereplő, aki nem napi facilitátor, és csak célhoz kötött személyes adathozzáférést kap.</p>
+<hr>
+<p><strong>Dokumentum státusza:</strong> a működési koncepció interjúval tisztázott, scoping-előkészítő állapotban van. A program tartalmi indíthatóságához a két piros munkacsomag elkészítése szükséges. A konkrét technológiai architektúra, költség, ütemezés és jogi megfelelés külön scoping és szakmai ellenőrzés után véglegesíthető.</p>
+</article>
+  </div>
+  <footer>Manipular · munkakoncepció · 2026. szeptember</footer>
+</body>
+</html>
