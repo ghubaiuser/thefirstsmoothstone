@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-val támogatott szociológiai diplomamunka - kezdőbarát útmutató</title>
+<style>
+:root{--ink:#17202a;--muted:#59636e;--accent:#1f5f8b;--soft:#eef5f9;--warn:#fff4df;--ok:#eef8ef;--line:#d8e0e6}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,"DejaVu Sans",sans-serif;color:var(--ink);line-height:1.55;background:white}
+main{max-width:980px;margin:0 auto;padding:42px 52px 70px}.cover{padding:48px 0 34px;border-bottom:4px solid var(--accent)}
+h1{font-size:34px;line-height:1.15;margin:0 0 12px}.subtitle{font-size:19px;color:var(--muted);max-width:780px}.meta{margin-top:20px;font-size:13px;color:var(--muted)}
+h2{font-size:25px;margin:42px 0 12px;color:#163e59;border-bottom:1px solid var(--line);padding-bottom:7px}h3{font-size:19px;margin:27px 0 9px}h4{font-size:16px;margin:20px 0 7px}
+p{margin:8px 0 12px}ul,ol{padding-left:24px}li{margin:5px 0}.toc{background:var(--soft);padding:20px 24px;margin:28px 0;border-radius:10px}.toc a{color:var(--accent);text-decoration:none}.callout{padding:15px 18px;border-left:5px solid var(--accent);background:var(--soft);margin:17px 0}.warn{border-left-color:#b77400;background:var(--warn)}.ok{border-left-color:#3b7f45;background:var(--ok)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{border:1px solid var(--line);border-radius:9px;padding:14px 16px;break-inside:avoid}.card h4{margin-top:0}.badge{display:inline-block;padding:2px 8px;border-radius:12px;background:var(--soft);font-size:12px;font-weight:bold;color:#24485f}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;break-inside:avoid}th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top}th{background:#f4f7f9;text-align:left}
+pre{white-space:pre-wrap;background:#f7f8fa;border:1px solid var(--line);padding:14px 16px;border-radius:8px;font-size:12.5px;line-height:1.45;break-inside:avoid}code{font-family:"DejaVu Sans Mono",monospace}.checklist li{list-style:"☐  ";padding-left:3px}.small{font-size:12.5px;color:var(--muted)}.pagebreak{break-before:page}.sources li{font-size:12.5px;margin:8px 0}.footer-note{margin-top:45px;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--muted)}
+@media(max-width:700px){main{padding:24px 20px}.grid{grid-template-columns:1fr}h1{font-size:28px}}
+@media print{main{max-width:none;padding:20mm 17mm}.cover{padding-top:18mm}.toc{break-inside:avoid}a{color:inherit;text-decoration:none}@page{size:A4;margin:12mm 10mm 14mm}h2{break-after:avoid}h3{break-after:avoid}.card,pre,table,.callout{break-inside:avoid}}
+</style>
+</head>
+<body><main>
+<section class="cover">
+  <div class="badge">Kezdőbarát munkafolyamat</div>
+  <h1>AI-val támogatott szociológiai diplomamunka</h1>
+  <div class="subtitle">Részletes beállítási és használati útmutató annak, aki még nem jártas az AI-eszközökben: előfizetés, Project, Work/desktop, pluginok és appok, fájl- és kontextuskezelés, promptolás, forrásellenőrzés, kvalitatív és kvantitatív munkafolyamatok.</div>
+  <div class="meta">Verzió: 2026. szeptember 7. • A termékfunkciók és limitek idővel változhatnak.</div>
+</section>
+
+<div class="callout warn"><strong>Fontos:</strong> az AI-t ne „szellemíróként”, hanem kutatási asszisztensként használd. A diplomamunka szakmai felelőssége a hallgatóé. Minden idézetet, oldalszámot, DOI-t, statisztikát és bibliográfiai adatot ellenőrizz az eredeti forrásban, és tartsd be az egyetemed AI-használati és plágiumszabályzatát.</div>
+
+<nav class="toc">
+<strong>Tartalom</strong>
+<ol>
+<li><a href="#start">Mit vegyél meg és mit telepíts?</a></li>
+<li><a href="#setup">Az ajánlott alapbeállítás 30 perc alatt</a></li>
+<li><a href="#project">Project és kontextuskezelés</a></li>
+<li><a href="#desktop">Web, desktop és lokális mappa</a></li>
+<li><a href="#plugins">Skillek, pluginok és connected appok</a></li>
+<li><a href="#workflow">Diplomamunka-folyamat az elejétől a beadásig</a></li>
+<li><a href="#prompts">Promptolás: sablonok, amelyek tényleg működnek</a></li>
+<li><a href="#socio">Szociológia-specifikus AI-használat</a></li>
+<li><a href="#context">Kontextustakarítás és „token-spórolás”</a></li>
+<li><a href="#integrity">Források, hivatkozások, adatvédelem, etika</a></li>
+<li><a href="#todo">Konkrét TODO-lista</a></li>
+<li><a href="#sources">Aktuális termékforrások</a></li>
+</ol>
+</nav>
+
+<h2 id="start">1. Mit vegyél meg és mit telepíts?</h2>
+<h3>Előfizetés: legtöbb diplomamunkához a Plus az ésszerű alap</h3>
+<table>
+<tr><th>Csomag</th><th>Mikor elég?</th><th>Diplomamunkához értékelés</th></tr>
+<tr><td><strong>Free</strong></td><td>Próba, alkalmi kérdések, kevés fájl.</td><td>El lehet kezdeni vele, de a fájl- és fejlettebb kutatási limitek hamar zavaróak lehetnek.</td></tr>
+<tr><td><strong>Go</strong></td><td>Olcsóbb, intenzívebb hétköznapi használat, több üzenet/feltöltés, mint Free.</td><td>Költségérzékeny megoldás, de komolyabb érvelési és hosszabb kutatási munkához a Plus jobb.</td></tr>
+<tr><td><strong>Plus - 20 USD/hó</strong></td><td>Rendszeres kutatás, fájlelemzés, fejlettebb érvelés, Deep Research, projektek.</td><td><strong>Ajánlott kiindulópont.</strong> Egy szociológiai szakdolgozathoz tipikusan ez adja a legjobb ár/érték arányt.</td></tr>
+<tr><td><strong>Pro</strong></td><td>Napi, nagy volumenű kutatás; sok hosszú, nehéz feladat; magasabb limitek.</td><td>Csak akkor érdemes, ha a Plus limitek ténylegesen akadályoznak. Egyetlen diplomamunka miatt általában túlzás.</td></tr>
+</table>
+<p class="small">Megjegyzés: az OpenAI 2026-ban több Pro-szintet is bevezetett/tesztelt egyes felületeken; a pontos aktuális ár és keret a fiókod „My Plan / Saját csomag” nézetében az irányadó.</p>
+
+
+<h3>Melyik platform illeszkedik legjobban ehhez a workflow-hoz?</h3>
+<table>
+<tr><th>Platform</th><th>Aktuális egyéni ár (2026.09.07.)</th><th>Erősség diplomamunkánál</th><th>Gyengeség</th><th>Ajánlás</th></tr>
+<tr><td><strong>ChatGPT</strong></td><td>Go: 8 USD/hó; Plus: 20 USD/hó; Pro: 200 USD/hó</td><td>Project, Work, webes kutatás, fájlok, pluginok, Codex; nagyon jó általános kutatási központ.</td><td>A lokális, skill-alapú workflow technikaibb része kevésbé „készre csomagolt”, mint Claude Code-ban.</td><td><strong>Legjobb kezdő/sweet spot: Plus.</strong> Ha főleg egy felületen akarsz dolgozni, ezt választanám.</td></tr>
+<tr><td><strong>Claude</strong></td><td>Pro: 20 USD/hó havi számlázással (17 USD/hó éves előfizetésnél); Max: 100 USD/hótól</td><td>Claude Code benne van a Pro-ban; Projects, Skills, Connectors; az Open Scholar eredetileg erre készült.</td><td>A Max gyorsan drága; a teljes workflow fejlesztőibb, terminálosabb lehet.</td><td><strong>Legjobb az Open Scholar-központú advanced rendszerhez.</strong> Pro-val indulj.</td></tr>
+<tr><td><strong>Cursor</strong></td><td>Hobby: ingyenes; Pro: 20 USD/hó; Pro+: 60 USD/hó; Ultra: 200 USD/hó</td><td>Kiváló lokális mappakezelés, agentek, MCP, skillek és hookok; több modell egy editorban.</td><td>Alapvetően kódeditor; nem kutatási/akadémiai felületnek tervezték.</td><td><strong>Technikai felhasználónak Pro.</strong> Pro+ csak napi intenzív agenthasználatnál.</td></tr>
+<tr><td><strong>Google AI / Gemini</strong></td><td>AI Pro: 19,99 USD/hó amerikai listaár; Ultra: 249,99 USD/hó amerikai listaár. A helyi ár eltérhet.</td><td>Erős Google Docs/Drive/Notebook-integráció, Deep Research és nagy Google-ökoszisztéma.</td><td>A skill-bundle workflow kevésbé egységes; ár és funkció régiónként eltérhet.</td><td><strong>Jó, ha már Google-központú a munkád.</strong> AI Pro bőven elég a legtöbb hallgatónak.</td></tr>
+</table>
+<div class="callout ok"><strong>Összesített döntés:</strong> teljesen kezdő szociológus hallgatónak <strong>ChatGPT Plus</strong> a legegyszerűbb és legkiegyensúlyozottabb választás. Ha kifejezetten az <strong>Open Scholar Skill</strong> köré akarod építeni a rendszert, <strong>Claude Pro + Claude Code</strong> a legtermészetesebb. Ha helyi mappákon, Markdown/LaTeX fájlokon, agentekkel és skillekkel dolgoznál, <strong>Cursor Pro</strong> vagy <strong>Codex/Claude Code</strong> a jobb technikai munkapad. Pro/Max/Ultra szintre csak akkor válts, ha 1-2 hét valós használat után rendszeresen limitbe ütközöl.</div>
+<h3>Három költségszint</h3>
+<table>
+<tr><th>Szint</th><th>Mit vegyél?</th><th>Havi kiadás</th><th>Kinek?</th></tr>
+<tr><td><strong>Minimum</strong></td><td>Free/Go + Zotero + Word/Docs</td><td>0-8 USD + esetleges irodai szoftver</td><td>Próba, ritkább AI-használat.</td></tr>
+<tr><td><strong>Sweet spot</strong></td><td>ChatGPT Plus <em>vagy</em> Claude Pro + Zotero</td><td>kb. 20 USD</td><td><strong>A legtöbb diplomázónak ezt javaslom.</strong></td></tr>
+<tr><td><strong>Power user</strong></td><td>ChatGPT Plus/Pro + Claude/Cursor vagy API-alapú PaperQA2</td><td>40 USD-tól akár 200+ USD-ig</td><td>Nagy korpusz, sok agentfutás, napi intenzív kutatás. Csak indokolt esetben.</td></tr>
+</table>
+<p class="small">Az árak USD listaárak, adó nélkül vagy régiótól függően; Magyarországon a végső számlázási összeg és pénznem eltérhet. Előfizetés előtt mindig nézd meg a saját fiókod checkout oldalát.</p>
+
+<h3>Mit telepíts?</h3>
+<div class="grid">
+<div class="card"><h4>1. ChatGPT desktop app</h4><p>Windows/macOS alatt erősen ajánlott. A desktop Work képes - engedéllyel - lokális mappák és fájlok kezelésére. Linuxon 2026-ban public preview is elérhető bizonyos disztribúciókon.</p></div>
+<div class="card"><h4>2. Google Drive plugin/app - ha Drive-ban dolgozol</h4><p>Hasznos, ha a cikkek, jegyzetek, táblázatok és fejezetverziók Drive-ban vannak. Nem kötelező, ha mindent lokális mappában tartasz.</p></div>
+<div class="card"><h4>3. Referenciakezelő</h4><p>Zotero, Mendeley vagy az egyetemed által javasolt megoldás. Az AI ne legyen a bibliográfiai adatbázisod; a referenciakezelő legyen az „igazság forrása”.</p></div>
+<div class="card"><h4>4. Word / Google Docs / LaTeX</h4><p>A végleges kéziratot hagyományos dokumentumszerkesztőben tartsd. ChatGPT legyen az elemző és szerkesztő asszisztens, ne az egyetlen tárolóhely.</p></div>
+</div>
+
+<div class="callout ok"><strong>Egyszerű ajánlás:</strong> Plus + ChatGPT desktop + egy Project + egy jól rendezett lokális/Drive mappa + Zotero. Ennél több eszközt csak akkor telepíts, ha már pontosan tudod, milyen problémát old meg.</div>
+
+<h2 id="setup">2. Az ajánlott alapbeállítás 30 perc alatt</h2>
+<ol>
+<li><strong>Hozz létre egy Projectet</strong> például „Diplomamunka - szociológia” néven.</li>
+<li><strong>Adj neki Project Instructions-t.</strong> Ebben rögzítsd a témát, nyelvet, hivatkozási stílust, kutatási megközelítést és az AI szerepét.</li>
+<li><strong>Tölts fel csak 5-10 alapdokumentumot:</strong> témakiírás, intézményi formai követelmények, kutatási terv, legfontosabb elméleti cikkek, esetleg kérdőív/interjúvázlat.</li>
+<li><strong>Készíts helyi mappastruktúrát</strong> (lásd lent).</li>
+<li><strong>Kapcsold be azt az appot, ahol ténylegesen vannak a fájljaid</strong> - például Google Drive. Ne köss össze mindent „hátha kell”.</li>
+<li><strong>Hozz létre külön chatet fejezetenként vagy munkafázisonként.</strong> Ne egyetlen több hónapos chatben csinálj mindent.</li>
+</ol>
+
+<h3>Ajánlott mappastruktúra</h3>
+<pre><code>Diplomamunka/
+  00_admin/
+    kovetelmenyek.pdf
+    hataridok.md
+    kutatasi_terv.md
+  01_irodalom/
+    pdf/
+    jegyzetek/
+    bib_export/
+  02_elmelet/
+  03_modszertan/
+  04_adatok/
+    raw/          # eredeti, változatlan adatok
+    cleaned/      # tisztított adatok
+    anonymized/   # AI-nak csak ezt add, ha személyes adat van
+  05_elemzes/
+    kval/
+    kvant/
+  06_fejezetek/
+    01_bevezetes/
+    02_irodalom/
+    03_modszertan/
+    04_eredmenyek/
+    05_megbeszeles/
+  07_abraak_tablak/
+  08_beadas/
+  99_archiv/</code></pre>
+
+<h2 id="project">3. Project és kontextuskezelés</h2>
+<p>A Project hosszú távú munkatér: fájlokat, chatjeidet és projektutasításokat tart egy helyen. 2026 szeptemberében a Projects minden előfizetési szinten elérhető; a fájlkorlát csomagonként eltér. Az OpenAI jelenlegi dokumentációja szerint Free: 5 fájl/project, Go és Plus: 25, Pro/Edu/Business/Enterprise: 40; egyszerre legfeljebb 10 fájl tölthető fel.</p>
+
+<h3>Milyen memóriát válassz?</h3>
+<table>
+<tr><th>Beállítás</th><th>Előny</th><th>Mikor használd?</th></tr>
+<tr><td><strong>Project-only memory</strong></td><td>A projekt nem keveredik más beszélgetéseiddel; tisztább kutatási határ.</td><td>Ha fontos az elkülönítés és főleg Chat módban dolgozol.</td></tr>
+<tr><td><strong>Default memory</strong></td><td>Rugalmasabb, és a Work-folyamatokkal való együttműködés egyszerűbb lehet.</td><td>Ha Workot is rendszeresen használnál ugyanazon projekt kontextusával.</td></tr>
+</table>
+<p class="small">A jelenlegi OpenAI-dokumentáció külön jelzi, hogy Project-only memory mellett a ChatGPT Work nem érhető el a projekten belül. A funkciók gyorsan változnak, ezért ha a felületeden ettől eltérő opciót látsz, a saját fiókod felülete az irányadó.</p>
+
+<h3>Project Instructions - ajánlott minta</h3>
+<pre><code>Ez egy szociológiai diplomamunka-projekt. Magyarul dolgozunk.
+
+Téma: [1-2 mondatban]
+Kutatási kérdés: [aktuális kérdés]
+Módszer: [kvalitatív / kvantitatív / vegyes]
+Hivatkozási stílus: [APA 7 / Harvard / intézményi]
+
+Szabályok:
+1. Ne találj ki forrást, DOI-t, oldalszámot vagy adatot.
+2. Ha egy állítás nincs a rendelkezésre álló forrásokkal alátámasztva, jelöld: ELLENŐRIZENDŐ.
+3. Különítsd el: (a) forrásból származó információ, (b) saját elemző következtetés, (c) ötlet/javaslat.
+4. Ne írj végleges hallgatói szöveget úgy, mintha az bizonyított lenne; előbb segíts vázlatot, érvrendszert és bizonyítéklistát készíteni.
+5. Minden komolyabb fejezetnél készíts „claim-evidence” táblát: állítás | bizonyíték | forrás | bizonytalanság.
+6. Kvalitatív adatoknál ne módosíts idézetet és ne tételezz fel résztvevői szándékot.
+7. Kvantitatív adatoknál jelezd a szükséges feltételezéseket és diagnosztikákat.
+8. Ha nem tudsz valamit biztosan, mondd ki.</code></pre>
+
+<h2 id="desktop">4. Web, desktop és lokális mappa</h2>
+<h3>Melyiket mikor?</h3>
+<table>
+<tr><th>Felület</th><th>Erősség</th><th>Ajánlott használat</th></tr>
+<tr><td><strong>Web Chat</strong></td><td>Gyors kérdések, Project chat, fájlfeltöltés, webes kutatás.</td><td>Napi gondolkodás, vázlat, források összevetése.</td></tr>
+<tr><td><strong>Desktop Chat</strong></td><td>Ugyanez kényelmesebben, projektek és helyi munkafolyamatok közelében.</td><td>Fő munkaállomás.</td></tr>
+<tr><td><strong>Work - cloud</strong></td><td>Hosszabb, több lépéses feladatok, kutatás, fájlok/appok használata és kész outputok.</td><td>Irodalom-feltérképezés, nagyobb elemzési feladat, dokumentum-előkészítés.</td></tr>
+<tr><td><strong>Work - desktop local</strong></td><td>Engedéllyel hozzáférhet helyi mappákhoz/fájlokhoz.</td><td>Fejezetmappák, lokális PDF-ek, táblázatok rendszerezése és elemzése.</td></tr>
+</table>
+
+<div class="callout warn"><strong>Lokális ≠ teljesen offline.</strong> Az OpenAI jelenlegi leírása szerint desktop Work esetén megnyithatsz helyi mappát és csak a szükséges fájlokhoz adhatsz jogosultságot, de az üzenetek és a feladat kontextusa felhőben is tárolódhat. Érzékeny kutatási adatot ezért csak az intézményi és etikai szabályok szerint adj át.</div>
+
+<h3>Hogyan adj hozzáférést helyi mappához biztonságosan?</h3>
+<ol>
+<li>Ne a teljes Dokumentumok vagy teljes felhőszinkron mappát add meg.</li>
+<li>Készíts külön <code>Diplomamunka_AI</code> mappát az AI számára használható másolatokkal.</li>
+<li>Személyes/interjúadatból csak anonimizált verzió kerüljön bele.</li>
+<li>Az eredeti nyers adat maradjon read-only / elkülönített helyen.</li>
+<li>Feladatonként csak azt a mappát vagy fájlt engedélyezd, amely tényleg kell.</li>
+</ol>
+
+<h2 id="plugins">5. Skillek, pluginok és connected appok</h2>
+<p>2026-ban a ChatGPT-ben a <strong>Plugins</strong> a workflow-k csomagolási módja: tartalmazhatnak skilleket (utasítás/workflow), connected appokat (külső adatok és műveletek) és sablonokat. A régebbi „connectors/apps” elnevezések részben összeolvadtak.</p>
+
+<h3>Mit érdemes ténylegesen használni?</h3>
+<table>
+<tr><th>Eszköz</th><th>Érték diplomamunkában</th><th>Ajánlás</th></tr>
+<tr><td><strong>Google Drive</strong></td><td>PDF-ek, Docs, Sheets, jegyzetek keresése és használata.</td><td>Telepítsd/kapcsold össze, ha itt van az anyagod.</td></tr>
+<tr><td><strong>Google Docs/Sheets képességek</strong></td><td>Fejezetszövegek és adatlapok feldolgozása.</td><td>Hasznos, de csak akkor, ha a forrásanyag tényleg Google-ban él.</td></tr>
+<tr><td><strong>Calendar</strong></td><td>Hataridők, heti kutatási blokkok.</td><td>Opcionális; projektmenedzsmentre jó.</td></tr>
+<tr><td><strong>Gmail</strong></td><td>Témavezetői levelek keresése/összefoglalása.</td><td>Csak kényelmi funkció; nem a kutatás magja.</td></tr>
+<tr><td><strong>Web / Deep Research</strong></td><td>Friss szakirodalmi tájékozódás és forráslista.</td><td>Nagyon hasznos, de a végső hivatkozásokat ellenőrizd kiadói/adatbázis oldalon.</td></tr>
+</table>
+
+<div class="callout"><strong>Ne „plugin-gyűjtéssel” kezdd.</strong> Kezdőként 1-2 adatforrás bőven elég. Minél több integráció van bekötve, annál nehezebb átlátni, miből származik egy válasz és milyen adathoz kapott hozzáférést.</div>
+
+<h3>Haladó kutatási skillek: mikor melyiket?</h3>
+<table>
+<tr><th>Megoldás</th><th>Mire való?</th><th>Telepítés / használat</th><th>Mikor érdemes?</th></tr>
+<tr><td><strong>Open Scholar Skill</strong></td><td>Szociológusokra és társadalomtudományokra szabott teljes kutatási pipeline: kutatási kérdés, szakirodalom, hipotézis, design, kvalitatív/kvantitatív elemzés, írás, hivatkozás, verifikáció, reviewer-szimuláció.</td><td>Eredetileg Claude Code-ra készült; Codexben is használható. A jelenlegi README 35 skill + 1 utility, összesen 36 modult ír. Telepítés: repo klónozása, majd <code>bash setup.sh</code>; Codexben a skill mappák linkelhetők a Codex skill-könyvtárába.</td><td><strong>Első számú advanced ajánlás szociológiához.</strong> Akkor telepítsd, ha már stabil a témád és valóban helyi projektmappából dolgozol.</td></tr>
+<tr><td><strong>Research Paper Lifecycle Skills</strong></td><td>42 hordozható skill a teljes tudományos életciklushoz: literature review, írás, citation/claim verification, preflight, reviewer, submission stb.</td><td><code>npx skills add ShaishavMaisuria/research-paper-lifecycle-skills --agent codex</code>; ugyanígy támogatott a Cursor, Gemini és Claude Code célpont.</td><td>Ha platformfüggetlen, moduláris skill-készletet akarsz. Diplomamunkánál csak a releváns modulokat használd.</td></tr>
+<tr><td><strong>PaperQA2</strong></td><td>Saját PDF-korpuszból keresés, összehasonlítás és forrásalapú válaszok.</td><td>Pythonos, technikaibb telepítés; külön modell/API-költség is lehet.</td><td>50-100+ saját cikk/PDF esetén kezd igazán értelmet nyerni. 10-30 cikkhez általában túlzás.</td></tr>
+<tr><td><strong>STORM / Co-STORM</strong></td><td>Témafeltárás, több nézőpont, kérdésfa, strukturált előkutatás és vázlat.</td><td>Technikai telepítés/API; nem szükséges a hétköznapi fejezetíráshoz.</td><td>A kutatási probléma elején, amikor még térképezed a vitákat és nézőpontokat.</td></tr>
+</table>
+<div class="callout warn"><strong>Ne telepíts mindent egyszerre.</strong> A kezdő workflow legyen: ChatGPT/Claude projekt + Zotero + rendezett mappa. Csak utána adj hozzá Open Scholart vagy Lifecycle Skillst. PaperQA2/STORM harmadik lépcső: akkor jön, amikor már van konkrét problémád, amit az alap rendszer nem old meg.</div>
+
+<h3>Open Scholar: minimális, biztonságos indítás</h3>
+<pre><code>1. Készíts külön diplomamunka projektmappát.
+2. A nyers, személyes adatot NE tedd az AI által elérhető mappába.
+3. Telepítsd az Open Scholart a dokumentáció szerint.
+4. Első parancs: /scholar-init
+5. Ezután csak a szükséges modult hívd:
+   /scholar-idea ...
+   /scholar-lit-review ...
+   /scholar-design ...
+   /scholar-qual ...       # kvalitatív kutatás
+   /scholar-analyze ...    # kvantitatív/eredményértelmezés
+   /scholar-write ...
+   /scholar-citation ...
+   /scholar-verify ...
+6. Minden nagy lépés után emberi ellenőrzés és research_log.md frissítés.</code></pre>
+
+<h3>Lifecycle Skills: ne az egész csomagot „engedélyezd rá” a dolgozatra</h3>
+<p>A 42 skillből induláskor elég 5-7: <code>orchestrate-paper</code>, <code>literature-review</code>, <code>verify-citations</code>, <code>verify-claims</code>, <code>refactor-structure</code>, <code>simulate-reviewers</code> és <code>assess-paper</code>. A beadási/konferencia-specifikus modulok jelentős része diplomamunkánál nem releváns.</p>
+
+
+<h2 id="workflow" class="pagebreak">6. Diplomamunka-folyamat az elejétől a beadásig</h2>
+<h3>0. Szabályzat és keretek</h3>
+<ul class="checklist">
+<li>Olvasd el az egyetem AI-/plágiumszabályzatát.</li>
+<li>Írd le, milyen AI-használatot kell deklarálni.</li>
+<li>Rögzítsd a hivatkozási stílust és formai követelményeket.</li>
+<li>Határozd meg, milyen adatot tilos külső AI-nak átadni.</li>
+</ul>
+
+<h3>1. Kutatási kérdés kialakítása</h3>
+<p>Az AI itt „kritikus beszélgetőtárs”. Ne azt kérd: „adj témát”, hanem add meg a társadalmi jelenséget, populációt, helyet/időszakot és hozzáférhető adatot, majd kérj 5-10 kutatható kérdésváltozatot, erősségekkel és gyengeségekkel.</p>
+
+<h3>2. Gyors irodalmi térkép</h3>
+<p>Cél: szerzők, elméleti iskolák, alapfogalmak, viták, tipikus változók/módszerek azonosítása. Még nem a fejezet megírása.</p>
+<ul>
+<li>Kérj „concept map”-et.</li>
+<li>Kérj keresőkifejezéseket magyarul és angolul.</li>
+<li>Kérj inklúziós/exklúziós kritériumokat.</li>
+<li>Utána keresd és töltsd le az eredeti cikkeket adatbázisból.</li>
+</ul>
+
+<h3>3. Forrásjegyzet készítése minden cikkhez</h3>
+<pre><code>Olvasd ezt a cikket kutatási jegyzetként, ne esszéként.
+Adj táblázatot:
+- teljes bibliográfiai adat (csak ha biztosan a dokumentumból olvasható)
+- kutatási kérdés
+- elméleti keret
+- minta/adat
+- módszer
+- fő eredmények
+- korlátok
+- 3 releváns idézhető állítás + oldalszám, HA ténylegesen látható
+- hogyan kapcsolódik a saját kutatási kérdésemhez
+- mi az, amit külön ellenőriznem kell.</code></pre>
+
+<h3>4. Elméleti keret</h3>
+<p>Készíts fogalmi mátrixot: fogalom → definíció → szerző → mérési/operacionalizálási mód → kritika → kapcsolat a kutatási kérdéssel.</p>
+
+<h3>5. Módszertan</h3>
+<p>Az AI jó „reviewer”: kérd meg, keressen belső ellentmondást a kutatási kérdés, minta, operacionalizálás és elemzési technika között. A tényleges módszertani döntést szakirodalommal és témavezetővel támaszd alá.</p>
+
+<h3>6. Adatelőkészítés</h3>
+<p>Először készíts adatnaplót: mi az eredeti fájl, mi változott, ki és mikor módosította. Kvantitatív adatnál az AI segíthet változólista, hiányzóérték-stratégia, kódbook és elemzési terv készítésében. Kvalitatív adatnál anonimizálás, kódlista és memo-struktúra kialakításában.</p>
+
+<h3>7. Elemzés</h3>
+<p>Minden elemzési lépéshez kérj „audit trail”-t: bemenet, lépés, indoklás, eredmény, bizonytalanság, következő ellenőrzés.</p>
+
+<h3>8. Fejezetvázlat → állítás-bizonyíték tábla → első kézirat</h3>
+<p>Ne „írj 20 oldalt” prompttal kezdj. Először fejezetvázlat, majd minden alfejezethez állítások és források, csak utána bekezdésvázlat. Ez radikálisan csökkenti a hallucinált hivatkozásokat.</p>
+
+<h3>9. Ellenőrzés</h3>
+<ul>
+<li>Minden hivatkozás létezik?</li>
+<li>Minden idézet pontos és az oldalszám valódi?</li>
+<li>A táblázatok számai reprodukálhatók?</li>
+<li>Az eredmények és az értelmezés nincsenek összecsúszva?</li>
+<li>Az AI által javasolt „jó hangzású” fogalmak tényleg léteznek a szakirodalomban?</li>
+</ul>
+
+<h2 id="prompts">7. Promptolás: sablonok, amelyek tényleg működnek</h2>
+<h3>A jó prompt 6 eleme</h3>
+<ol>
+<li><strong>Szerep:</strong> „Viselkedj szociológiai kutatási asszisztensként / módszertani reviewer-ként.”</li>
+<li><strong>Kontextus:</strong> téma, kutatási kérdés, minta, módszer.</li>
+<li><strong>Feladat:</strong> egyetlen konkrét eredmény.</li>
+<li><strong>Forráskorlát:</strong> „csak a feltöltött dokumentumokból” vagy „webes forrásokat is használhatsz, de hivatkozz”.</li>
+<li><strong>Output-formátum:</strong> táblázat, bullet lista, outline, memo.</li>
+<li><strong>Minőségellenőrzés:</strong> bizonytalanság, hiányok, ellenőrizendő pontok.</li>
+</ol>
+
+<h3>Sablon: szakirodalmi szintézis</h3>
+<pre><code>Szerep: szociológiai kutatási asszisztens.
+Cél: ne megírd helyettem a fejezetet, hanem készíts bizonyíték-alapú szintézist.
+
+Kutatási kérdés: [..]
+Források: kizárólag a feltöltött cikkek.
+
+Feladat:
+1. Azonosíts 3-5 közös témát/vitát.
+2. Témánként mutasd meg, mely szerzők értenek egyet és hol térnek el.
+3. Készíts táblázatot: állítás | támogató forrás | ellentmondó forrás | módszertani különbség | saját dolgozat szempontjából jelentőség.
+4. Ne adj bibliográfiai adatot, amit nem látsz biztosan.
+5. A végén legyen „bizonytalanságok és hiányzó források” rész.</code></pre>
+
+<h3>Sablon: fejezet reviewer</h3>
+<pre><code>Ne írd át automatikusan a szöveget. Először review-t kérek.
+Vizsgáld ezt a fejezetrészt 5 szempont szerint:
+- logikai folytonosság
+- fogalmi pontosság
+- bizonyíték és hivatkozás megfelelése
+- túl erős / oksági állítások
+- ismétlés és felesleges szöveg
+
+Minden problémánál add meg:
+1. pontos hely,
+2. mi a probléma,
+3. miért probléma szociológiai érvelésben,
+4. javítási stratégia.
+Csak ezután adj opcionális újrafogalmazást.</code></pre>
+
+<h3>Sablon: „ne hallucinálj”</h3>
+<pre><code>Ha egy információt nem tudsz biztosan alátámasztani a megadott forrásból,
+ne egészítsd ki valószínűnek hangzó részlettel. Írd helyette: [NEM ELLENŐRZÖTT].
+Ha oldalszám nem látható vagy nem biztos, ne találj ki oldalszámot.</code></pre>
+
+<h2 id="socio">8. Szociológia-specifikus AI-használat</h2>
+<h3>Kvalitatív kutatás</h3>
+<p><strong>Hasznos:</strong> kezdeti kódötletek, kódbook rendszerezése, interjúk közötti mintázatok, negatív esetek keresése, reflexív memo-kérdések, idézetindex.</p>
+<p><strong>Veszély:</strong> az AI könnyen „beleértelmez” motivációt a résztvevő szavaiba. Kérd expliciten, hogy különítse el a leíró kódot, az interpretív kódot és a teoretikus következtetést.</p>
+<pre><code>Kódold az interjúrészletet három szinten:
+A) leíró kód - mi hangzik el explicit módon;
+B) interpretív kód - milyen társadalmi jelentés sejthető;
+C) elméleti kapcsolat - mely fogalomhoz kapcsolható.
+Minden B és C szintű állítás mellé adj bizonytalansági megjegyzést.
+Ne módosítsd az idézet szövegét.</code></pre>
+
+<h3>Kvantitatív kutatás</h3>
+<p><strong>Hasznos:</strong> kódbook, változótípusok, adattisztítási terv, leíró statisztikák értelmezése, modellválasztási kérdések, kódmagyarázat.</p>
+<p><strong>Veszély:</strong> „p&lt;0,05 → fontos” típusú mechanikus értelmezés. Kérj hatásnagyságot, konfidenciaintervallumot, modellfeltételezéseket, robusztussági ellenőrzést és társadalomtudományi értelmezést.</p>
+
+<h3>Vegyes módszer</h3>
+<p>Az AI különösen jó egy „joint display” előkészítésére: kvantitatív eredmény | kvalitatív példa | konvergencia/ellentmondás | értelmezés | további kérdés.</p>
+
+<h2 id="context">9. Kontextustakarítás és „token-spórolás”</h2>
+<p>A cél nem pusztán az, hogy kevesebb token fogyjon, hanem hogy <strong>kevesebb irreleváns kontextus zavarja a modellt</strong>. Egy tiszta, kisebb kontextus gyakran jobb választ ad, mint egy több hónapos, minden témát tartalmazó chat.</p>
+
+<h3>Aranyszabályok</h3>
+<ul>
+<li><strong>Egy chat = egy munkafázis.</strong> Például „Elméleti keret - Bourdieu”, „Interjúkódolás - 1. kör”, „Eredményfejezet reviewer”.</li>
+<li><strong>Ne tölts fel mindent egyszerre.</strong> 3-8 releváns forrás gyakran jobb, mint 25 vegyes PDF.</li>
+<li><strong>Készíts „handoff memo”-t</strong> egy hosszú chat lezárásakor.</li>
+<li><strong>Az állandó szabály Project Instructions-ba kerüljön</strong>, ne minden promptba.</li>
+<li><strong>A stabil tények egy rövid projekt-briefben legyenek</strong> (1-2 oldal), ne 50 oldalas chatelőzményben.</li>
+<li><strong>Archiváld a lezárt verziókat</strong>, ne tarts minden vázlatot aktív forrásként.</li>
+</ul>
+
+<h3>Handoff memo prompt</h3>
+<pre><code>Készíts maximum 600 szavas átadási jegyzetet egy új chat számára.
+Csak a stabil, később szükséges kontextust tartsd meg:
+- kutatási kérdés és scope
+- már meghozott döntések + indok
+- használt fogalmak definíciója
+- megbízható források listája
+- nyitott kérdések
+- következő konkrét lépés
+Ne másold át a teljes beszélgetést, és hagyd ki a már elvetett ötleteket.</code></pre>
+
+<h3>Heti kontextustakarítás</h3>
+<ol>
+<li>Mentsd ki a fontos döntéseket egy <code>research_log.md</code> fájlba.</li>
+<li>A kész forrásjegyzeteket tedd külön fájlokba.</li>
+<li>Az elvetett verziókat vidd <code>99_archiv</code>-ba.</li>
+<li>Új fejezethez indíts új chatet az aktuális brief + releváns 3-6 forrással.</li>
+<li>Ha a modell régi, hibás állítást ismétel, inkább új chat, mint 15 üzenetes „javítgatás”.</li>
+</ol>
+
+<h2 id="integrity">10. Források, hivatkozások, adatvédelem, etika</h2>
+<h3>Forrásbiztonsági protokoll</h3>
+<table>
+<tr><th>AI állítása</th><th>Mit tegyél?</th></tr>
+<tr><td>„X szerző 2019-ben azt írta...”</td><td>Keresd meg az eredeti publikációt és ellenőrizd a pontos állítást.</td></tr>
+<tr><td>Idézőjeles idézet</td><td>Csak akkor használd, ha az eredeti PDF-ben szó szerint megtalálod.</td></tr>
+<tr><td>DOI / oldalszám</td><td>Külön ellenőrzés kötelező.</td></tr>
+<tr><td>Statisztikai adat</td><td>Eredeti adatforrás / táblázat / dataset dokumentáció.</td></tr>
+<tr><td>„A szakirodalom szerint...”</td><td>Minimum 2-3 konkrét, ellenőrzött forrást kérj mögé.</td></tr>
+</table>
+
+<h3>Érzékeny kutatási adatok</h3>
+<ul>
+<li>Ne tölts fel névvel, telefonszámmal, e-maillel, pontos címmel vagy más közvetlen azonosítóval ellátott interjút.</li>
+<li>Különösen érzékeny kategóriáknál (egészség, politika, vallás, szexuális élet, bűnügyi előzmény stb.) kövesd az etikai engedély és adatkezelési terv előírásait.</li>
+<li>Anonimizálás után is gondolj az indirekt azonosíthatóságra: ritka foglalkozás + kis település + konkrét esemény együtt felismerhetővé tehet valakit.</li>
+<li>Ha bizonytalan vagy, az adatot ne add át AI-nak; használj szintetikus vagy erősebben anonimizált kivonatot.</li>
+</ul>
+
+<h3>AI-használati napló</h3>
+<p>Vezess egy rövid táblázatot: dátum | eszköz/modell | feladat | használt adatok | output hogyan lett felhasználva | emberi ellenőrzés. Ez segít, ha az egyetem deklarációt kér, és saját magadnak is reprodukálhatóvá teszi a folyamatot.</p>
+
+<h2 id="todo" class="pagebreak">11. Konkrét TODO-lista</h2>
+<h3>Ma - beállítás</h3>
+<ul class="checklist">
+<li>Válassz Plus csomagot, ha rendszeresen fogod használni; Free/Go-val csak tesztelj, ha még bizonytalan vagy.</li>
+<li>Telepítsd a desktop appot.</li>
+<li>Hozd létre a „Diplomamunka - szociológia” Projectet.</li>
+<li>Másold be a fenti Project Instructions sablont és töltsd ki.</li>
+<li>Hozd létre a mappastruktúrát.</li>
+<li>Tedd bele az egyetemi követelményeket, kutatási tervet és 3-5 kulcsforrást.</li>
+<li>Kapcsold össze a Google Drive-ot csak akkor, ha ott dolgozol.</li>
+</ul>
+
+<h3>1. hét - kutatási alap</h3>
+<ul class="checklist">
+<li>Készíts 1 oldalas projekt briefet.</li>
+<li>Finomítsd a kutatási kérdést 3 alternatívára, majd válassz a témavezetővel.</li>
+<li>Készíts kulcsszólistát magyarul + angolul.</li>
+<li>Gyűjts 15-30 releváns forrást; ne az AI által generált bibliográfiát másold át vakon.</li>
+<li>Minden kulcsforráshoz készíts strukturált forrásjegyzetet.</li>
+</ul>
+
+<h3>2. hét - elmélet + módszertan</h3>
+<ul class="checklist">
+<li>Készíts fogalmi mátrixot.</li>
+<li>Építs claim-evidence táblát az irodalmi fejezethez.</li>
+<li>Kérj módszertani „red team” review-t: hol nem illeszkedik a kérdés, minta és módszer?</li>
+<li>Rögzítsd az elemzési tervet a tényleges adatfeldolgozás előtt.</li>
+</ul>
+
+<h3>Adatfelvétel/elemzés időszaka</h3>
+<ul class="checklist">
+<li>Tartsd külön a raw és cleaned/anonymized adatot.</li>
+<li>Vezess research logot minden lényegi döntésről.</li>
+<li>Kvalitatív kutatásnál készíts kódbook-verziókat és memókat.</li>
+<li>Kvantitatív kutatásnál dokumentáld a tisztítási és modellválasztási lépéseket.</li>
+<li>Minden eredményt ellenőrizz kézzel vagy reprodukálható kóddal.</li>
+</ul>
+
+<h3>Írás időszaka</h3>
+<ul class="checklist">
+<li>Egy fejezethez egy külön chat.</li>
+<li>Először vázlat, utána claim-evidence, utána bekezdésvázlat.</li>
+<li>Kész szövegnél reviewer prompt, majd célzott javítás.</li>
+<li>Ne engedd, hogy az AI új forrást „becsempésszen” ellenőrzés nélkül.</li>
+<li>Hetente készíts handoff memo-t és tisztítsd a kontextust.</li>
+</ul>
+
+<h3>Beadás előtti 72 óra</h3>
+<ul class="checklist">
+<li>Bibliográfia 100%-os ellenőrzése.</li>
+<li>Idézetek és oldalszámok 100%-os ellenőrzése.</li>
+<li>Ábrák/táblák forrása és számozása.</li>
+<li>Formai követelmények ellenőrzése.</li>
+<li>AI-használati deklaráció elkészítése, ha szükséges.</li>
+<li>Végső nyelvi proofread - tartalmi állítások megváltoztatása nélkül.</li>
+<li>PDF export és vizuális ellenőrzés.</li>
+</ul>
+
+<h2>12. Egy egyszerű, jól működő napi rutin</h2>
+<table>
+<tr><th>Idő</th><th>Te</th><th>AI</th></tr>
+<tr><td>10 perc</td><td>Meghatározod az aznapi konkrét eredményt.</td><td>Segít felbontani 2-4 lépésre.</td></tr>
+<tr><td>45-90 perc</td><td>Olvasol / elemzel / adatot dolgozol fel.</td><td>Kivonat, összehasonlítás, kódmagyarázat, kérdések.</td></tr>
+<tr><td>20 perc</td><td>Megírod a saját vázlatodat.</td><td>Reviewer: logika, hiány, bizonyíték.</td></tr>
+<tr><td>10 perc</td><td>Ellenőrzöd a forrást és rögzíted a döntést.</td><td>Handoff memo / következő lépés.</td></tr>
+</table>
+
+<div class="callout ok"><strong>Ha csak egy dolgot jegyzel meg:</strong> a legjobb diplomamunka-workflow nem „prompt → kész fejezet”, hanem <strong>forrás → jegyzet → állítás-bizonyíték → vázlat → saját szöveg → AI-review → emberi forrásellenőrzés</strong>.</div>
+
+<h2 id="sources">13. Aktuális termékforrások (ellenőrizve 2026.09.07.)</h2>
+<ol class="sources">
+<li>OpenAI Help Center: <em>Projects in ChatGPT</em> - Project működés, project memory, fájllimitek, appok. https://help.openai.com/en/articles/10169521-projects-in-chatgpt</li>
+<li>OpenAI Help Center: <em>ChatGPT Work and Codex</em> - desktop Work, local folder/file hozzáférés, felhős kontextus. https://help.openai.com/en/articles/20001275/</li>
+<li>OpenAI Help Center: <em>Plugins in ChatGPT and Codex</em> - plugin, skill és connected app fogalmak. https://help.openai.com/en/articles/20001256/</li>
+<li>OpenAI Help Center: <em>Connected apps in ChatGPT</em> - connected appok működése és jogosultságai. https://help.openai.com/en/articles/11487775-connected-apps-in-chatgpt</li>
+<li>OpenAI Help Center: <em>What is ChatGPT Plus?</em> - Plus ár és fő képességek. https://help.openai.com/en/articles/6950777</li>
+<li>OpenAI: <em>Introducing ChatGPT Go, now available worldwide</em> - Go/Plus/Pro árszintek bejelentése. https://openai.com/index/introducing-chatgpt-go/</li>
+<li>OpenAI Help Center: <em>GPT-5.6 in ChatGPT</em> - aktuális modell-hozzáférés csomagonként. https://help.openai.com/en/articles/20001354-gpt-56-in-chatgpt/</li>
+<li>OpenAI Help Center: <em>ChatGPT Release Notes</em> - 2026-os desktop, Work és plugin változások. https://help.openai.com/en/articles/6825453</li>
+<li>ChatGPT Pricing - aktuális csomagjellemzők és kontextuskeretek. https://chatgpt.com/pricing/</li>
+<li>Anthropic / Claude Pricing - Free, Pro, Max, Claude Code, Projects, Skills és Connectors. https://claude.com/pricing</li>
+<li>Cursor Pricing és Models &amp; Pricing - Hobby, Pro, Pro+, Ultra és usage poolok. https://cursor.com/pricing és https://cursor.com/docs/models-and-pricing</li>
+<li>Google One: Google AI plans - AI Pro/Ultra funkciók; a helyi ár régiónként eltérhet. https://one.google.com/about/google-ai-plans/</li>
+<li>Google Blog: Google AI Pro 19,99 USD/hó és Ultra 249,99 USD/hó amerikai listaárának bejelentése. https://blog.google/products-and-platforms/products/gemini/gemini-app-updates-io-2025/</li>
+<li>Open Scholar Skill - aktuális README/USAGE, társadalomtudományi workflow és telepítés. https://github.com/joshzyj/open-scholar-skill</li>
+<li>Research Paper Lifecycle Skills - 42 skill és támogatott agent célpontok. https://github.com/ShaishavMaisuria/research-paper-lifecycle-skills</li>
+</ol>
+
+<p class="footer-note">Ez az útmutató technikai és munkaszervezési segítség. Nem helyettesíti a témavezetői, módszertani, etikai vagy intézményi előírásokat. A ChatGPT felülete, csomagjai és limitjei változhatnak; előfizetés előtt ellenőrizd a saját fiókodban látható aktuális feltételeket.</p>
+</main></body></html>
